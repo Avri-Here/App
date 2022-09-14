@@ -1,13 +1,10 @@
 // import img from "../Img/img_avatar.png";
 // import { useState, useEffect } from "react";
 
-
-
-
-
-import React from "react";
+import React, { useRef } from "react";
 import io from "socket.io-client";
 function ChatTemple(props) {
+
   const ENDPOINT = "http://localhost:3001";
   const options = {
     rememberUpgrade: true,
@@ -17,10 +14,26 @@ function ChatTemple(props) {
   };
   const socketIOClient = io(ENDPOINT, options);
   function sendMass() {
-    const corrUser = localStorage.getItem("UserName");
-    socketIOClient.emit("chat message from clinet", props.message, corrUser);
-    socketIOClient.once("chat message", (message, corrUserPass ) => {
-      console.log(message, corrUserPass);
+    socketIOClient.emit(
+      "chat message from clinet",
+      props.message,
+      localStorage.getItem("userConvr")
+    );
+
+    socketIOClient.once("chat message", (message, userConvr) => {
+      
+      if (true) {
+        const newMass = {
+          from: localStorage.getItem("UserName"),
+          messages: message,
+          timeMass: new Date().getHours() + " : " + new Date().getMinutes()
+        };
+        console.log(message, userConvr);
+        // props.refProp.current.scrollTop = props.refProp.current.clientHeight;
+        // window.scrollTo(0, document.body.scrollHeight);
+        // props.setArrMessage((current) => [...current, newMass]);
+        // console.log(props.arrMessage);
+      }
     });
     props.startChat(localStorage.getItem("chatWith"));
   }
@@ -46,7 +59,7 @@ function ChatTemple(props) {
                 typeof item === "object"
               ) {
                 return (
-                  <li>
+                  <li style={{ listStyleType: "none" }}>
                     <div className="message-data">
                       <span className="message-data-name">
                         <i className="fa fa-circle online" /> {item.from}
@@ -59,7 +72,7 @@ function ChatTemple(props) {
                 );
               } else if (typeof item === "object") {
                 return (
-                  <li className="clearfix">
+                  <li style={{ listStyleType: "none" }} className="clearfix">
                     <div className="message-data align-right">
                       <span className="message-data-time">{item.timeMass}</span>
                       &nbsp; &nbsp;
@@ -73,6 +86,7 @@ function ChatTemple(props) {
                 );
               }
             })}
+           
           </ul>
         </div>
       </div>

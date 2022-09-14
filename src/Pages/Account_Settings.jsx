@@ -41,9 +41,9 @@ export default (props) => {
         Delete My User !
       </button>
 
-      <p style={{textAlign: "center"}}>{status.m1}</p>
+      <p dir="rtl" style={{textAlign: "center"}}>{status.m1}</p>
       <hr/>
-      <p style={{textAlign: "center"}}>{status.m2}</p>
+      <p dir="rtl" style={{textAlign: "center"}}>{status.m2}</p>
     </div>
   );
 };

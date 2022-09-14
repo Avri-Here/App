@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatTemple from "./ChatTemple";
 import styled from "styled-components";
-// import socketIOClient from "socket.io-client";
-// import io from "socket.io-client";
 import img from "../Img/img_avatar.png";
 const axios = require("axios").default;
-// let socket = null;
 
 const Box = styled.div`
   @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
@@ -213,18 +210,11 @@ const Box = styled.div`
   }
 `;
 
-// const ENDPOINT = "http://localhost:3001";
-// var options = {
-//   rememberUpgrade: true,
-//   transports: ["websocket"],
-//   secure: true,
-//   rejectUnauthorized: false,
-// };
-// const socketIOClient = io(ENDPOINT, options);
 export default () => {
   const [message, setMessage] = useState("");
   const [arrUsers, setArrUsers] = useState(null);
   const [arrMessage, setArrMessage] = useState();
+  const useref = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -248,6 +238,13 @@ export default () => {
   }, []);
   function startChat(paramsUser) {
     localStorage.setItem("chatWith", paramsUser);
+    const sorted = [localStorage.getItem("UserName"), paramsUser];
+    const orderArry = sorted.sort((a, b) => a.localeCompare(b));
+    let comper = " ";
+    orderArry.forEach((element) => {
+      comper = comper + element;
+    });
+    localStorage.setItem("userConvr", comper);
     axios
       .post(
         "http://localhost:3001/chat/startChat",
@@ -263,13 +260,9 @@ export default () => {
         }
       )
       .then((response) => {
-        console.log(response);
-        try {
-          console.log(response.data.messages[0].messages);
+        if (!message) {
           setArrMessage(response.data.messages[0].messages);
-        } catch (error) {
-          console.log("First !");
-          setArrMessage(["App"]);
+          console.log(response);
         }
       })
       .catch(function (error) {
@@ -324,10 +317,12 @@ export default () => {
           <div className="chat-header clearfix">
             {arrMessage && (
               <ChatTemple
+                refProp={useref}
                 arrMessage={arrMessage}
                 startChat={startChat}
                 message={message}
                 setMessage={setMessage}
+                setArrMessage={setArrMessage}
               />
             )}
           </div>
