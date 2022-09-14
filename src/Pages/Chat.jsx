@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatTemple from "./ChatTemple";
 import styled from "styled-components";
 // import socketIOClient from "socket.io-client";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import img from "../Img/img_avatar.png";
 const axios = require("axios").default;
 // let socket = null;
@@ -73,7 +72,7 @@ const Box = styled.div`
     float: left;
     background: #f2f5f8;
     border-top-right-radius: 5px;
-    borderRadius: 5px;
+    borderradius: 5px;
     width: 70%;
     overflow: auto;
     color: #434651;
@@ -121,7 +120,7 @@ const Box = styled.div`
     padding: 18px 20px;
     line-height: 26px;
     font-size: 16px;
-    borderRadius: 7px;
+    borderradius: 7px;
     margin-bottom: 30px;
     width: 90%;
     position: relative;
@@ -158,7 +157,7 @@ const Box = styled.div`
     padding: 10px 20px;
     font: 14px/22px "Lato", Arial, sans-serif;
     margin-bottom: 10px;
-    borderRadius: 5px;
+    borderradius: 5px;
     resize: none;
   }
   .chat .chat-message .fa-file-o,
@@ -214,14 +213,14 @@ const Box = styled.div`
   }
 `;
 
-const ENDPOINT = "http://localhost:3001";
-var options = {
-  rememberUpgrade: true,
-  transports: ["websocket"],
-  secure: true,
-  rejectUnauthorized: false,
-};
-const socketIOClient = io(ENDPOINT, options);
+// const ENDPOINT = "http://localhost:3001";
+// var options = {
+//   rememberUpgrade: true,
+//   transports: ["websocket"],
+//   secure: true,
+//   rejectUnauthorized: false,
+// };
+// const socketIOClient = io(ENDPOINT, options);
 export default () => {
   const [message, setMessage] = useState("");
   const [arrUsers, setArrUsers] = useState(null);
@@ -229,14 +228,6 @@ export default () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    socketIOClient.on(
-      "connection",
-      (data) => {
-        socketIOClient.emit("new user", data);
-      },
-      []
-    );
-
     axios
       .post(
         "http://localhost:3001/users/",
@@ -286,26 +277,7 @@ export default () => {
       });
     setMessage("");
   }
-  // function sendMass() {
-  //   if (socket === null) {
-  //     socket = socketIOClient("http://localhost:3001", {
-  //       transports: ["websocket"]
 
-  //     });
-
-  //   }
-  //   socket.emit("chat message", "from clinet");
-  //   socket.on("chat message clinet", function (msg) {
-  //     console.log(msg);
-  //   });
-
-  //   socket.on("connect_error", (err) => {
-  //     console.log(`connect_error due to ${err}`);
-  //   });
-  // }
-  // socketIOClient.on("new user", (data) => {
-  //   console.log(data);
-  // });
   if (arrUsers) {
     return (
       <Box>
@@ -316,21 +288,23 @@ export default () => {
               <i className="fa fa-search" />
             </div>
             <ul className="list">
-              {arrUsers.map((item, index) => { 
-                if (item != localStorage.getItem("UserName")) {
+              {arrUsers.map((item, index) => {
+                if (item !== localStorage.getItem("UserName")) {
                   return (
                     <li
                       key={index}
                       className="clearfix"
-                      style={{"listStyleType": "none"}}
+                      style={{ listStyleType: "none" }}
                       onClick={() => {
                         startChat(item);
                       }}
                     >
-                          
-    
-    
-                      <img style={{"width": "25%", "height": "auto","borderRadius": "45%" }}
+                      <img
+                        style={{
+                          width: "25%",
+                          height: "auto",
+                          borderRadius: "45%",
+                        }}
                         src={img}
                         alt="avatar"
                       />
@@ -346,7 +320,7 @@ export default () => {
               })}
             </ul>
           </div>
-          
+
           <div className="chat-header clearfix">
             {arrMessage && (
               <ChatTemple
