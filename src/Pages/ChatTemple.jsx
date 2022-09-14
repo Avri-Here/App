@@ -8,6 +8,7 @@ function ChatTemple(props) {
       <div className="chat-about">
         <div className="chat-with">
           <h1>Chat with {localStorage.getItem("chatWith")}</h1>
+          <h1>{typeof props.arrMessage[0] === 'object' ? "messages sent : " + props.arrMessage.length : "No messages have been sent yet"}</h1>
         </div>
         
       </div>
@@ -18,7 +19,7 @@ function ChatTemple(props) {
             {props.arrMessage.map((item, index) => {
 
 
-              if (item.from == localStorage.getItem("UserName")) {
+              if (item.from == localStorage.getItem("UserName") && typeof item === 'object') {
                 return (
                   <li>
                     <div className="message-data">
@@ -31,7 +32,7 @@ function ChatTemple(props) {
                     <div className="message my-message">{item.messages}</div>
                   </li>
                 );
-              } else {
+              } else if(typeof item === 'object'){
                 return (
                   <li className="clearfix">
                     <div className="message-data align-right">

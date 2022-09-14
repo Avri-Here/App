@@ -1,4 +1,4 @@
-import "./Stayle/Chat.scss";
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatTemple from "./ChatTemple";
@@ -73,7 +73,7 @@ const Box = styled.div`
     float: left;
     background: #f2f5f8;
     border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    borderRadius: 5px;
     width: 70%;
     overflow: auto;
     color: #434651;
@@ -121,7 +121,7 @@ const Box = styled.div`
     padding: 18px 20px;
     line-height: 26px;
     font-size: 16px;
-    border-radius: 7px;
+    borderRadius: 7px;
     margin-bottom: 30px;
     width: 90%;
     position: relative;
@@ -158,7 +158,7 @@ const Box = styled.div`
     padding: 10px 20px;
     font: 14px/22px "Lato", Arial, sans-serif;
     margin-bottom: 10px;
-    border-radius: 5px;
+    borderRadius: 5px;
     resize: none;
   }
   .chat .chat-message .fa-file-o,
@@ -256,7 +256,6 @@ export default () => {
       });
   }, []);
   function startChat(paramsUser) {
-    console.log(paramsUser);
     localStorage.setItem("chatWith", paramsUser);
     axios
       .post(
@@ -317,13 +316,13 @@ export default () => {
               <i className="fa fa-search" />
             </div>
             <ul className="list">
-              {arrUsers.map((item, index) => {
+              {arrUsers.map((item, index) => { 
                 if (item != localStorage.getItem("UserName")) {
                   return (
                     <li
                       key={index}
                       className="clearfix"
-                      style={{"list-style-type": "none"}}
+                      style={{"listStyleType": "none"}}
                       onClick={() => {
                         startChat(item);
                       }}
@@ -331,7 +330,7 @@ export default () => {
                           
     
     
-                      <img style={{"width": "25%", "height": "auto","border-radius": "45%" }}
+                      <img style={{"width": "25%", "height": "auto","borderRadius": "45%" }}
                         src={img}
                         alt="avatar"
                       />
@@ -347,6 +346,7 @@ export default () => {
               })}
             </ul>
           </div>
+          
           <div className="chat-header clearfix">
             {arrMessage && (
               <ChatTemple
