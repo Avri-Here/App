@@ -6,8 +6,6 @@ import io from "socket.io-client";
 const ENDPOINT = "http://localhost:3001";
 const socketIOClient = io(ENDPOINT);
 function ChatTemple(props) {
-  const useref = useRef(null);
-
   useEffect(() => {
     socketIOClient.on("chat message", (message, userConvr) => {
       if (true) {
@@ -18,6 +16,10 @@ function ChatTemple(props) {
         };
         console.log(message, userConvr);
         // useref.current.scrollTop = useref.current.clientHeight;
+        let chatWrapper = document.getElementById(
+          props.arrMessage.length - 2 + "aa"
+        );
+        chatWrapper.scrollTo(0, chatWrapper.innerHeight);
         // window.scrollTo(0, document.body.scrollHeight);
         props.setArrMessage((current) => [...current, newMass]);
       }
@@ -54,7 +56,8 @@ function ChatTemple(props) {
               ) {
                 return (
                   <li
-                    ref={item === props.arrMessage.length - 1 ? useref : null}
+                    key={index}
+                    id={index + "aa"}
                     style={{ listStyleType: "none" }}
                   >
                     <div className="message-data">
@@ -69,7 +72,11 @@ function ChatTemple(props) {
                 );
               } else if (typeof item === "object") {
                 return (
-                  <li style={{ listStyleType: "none" }} className="clearfix">
+                  <li
+                    key={index}
+                    style={{ listStyleType: "none" }}
+                    className="clearfix"
+                  >
                     <div className="message-data align-right">
                       <span className="message-data-time">{item.timeMass}</span>
                       &nbsp; &nbsp;
@@ -86,28 +93,47 @@ function ChatTemple(props) {
           </ul>
         </div>
       </div>
-      <div className="chat-message clearfix">
-        <textarea
-          name="message-to-send"
-          id="message-to-send"
-          placeholder="Type your message"
-          rows={3}
-          defaultValue={""}
-          value={props.message}
-          onChange={(e) => {
-            props.setMessage(e.target.value);
-          }}
-        />
-        <i className="fa fa-file-o" /> &nbsp;&nbsp;&nbsp;
-        <i className="fa fa-file-image-o" />
-        <button
-          onClick={() => {
-            sendMass();
-          }}
-        >
-          Send
-        </button>
-      </div>
+      <footer>
+        <div style={{ marginTop: "15%" }}>
+          <textarea
+            style={{
+              width: " 887px",
+              height: "67px",
+              marginTop: "2vw",
+              background: "lightgrey",
+            }}
+            name="message-to-send"
+            id="message-to-send"
+            placeholder="Type your message"
+            rows={3}
+            defaultValue={""}
+            value={props.message}
+            onChange={(e) => {
+              props.setMessage(e.target.value);
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "2vw",
+              width: "20vw",
+              border: "3px solid green",
+              borderRadius: "3vw",
+              marginLeft: "34%",
+            }}
+          >
+            <button
+              onClick={() => {
+                sendMass();
+              }}
+            >
+              Send
+            </button>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }

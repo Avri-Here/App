@@ -8,11 +8,11 @@ const axios = require("axios").default;
 const ENDPOINT = "http://localhost:3001";
 const socketIOClient = io(ENDPOINT);
 const Box = styled.div`
-  @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+  // @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
   *,
   *:before,
   *:after {
-    box-sizing: border-box;
+    // box-sizing: border-box;
   }
   body {
     background: #c5ddeb;
@@ -49,7 +49,9 @@ const Box = styled.div`
   }
   .people-list ul {
     padding: 20px;
-    height: 770px;
+    height: 15vw;
+    width: 100%;
+    // overflow: auto:
   }
   .people-list ul li {
     padding-bottom: 20px;
@@ -73,6 +75,7 @@ const Box = styled.div`
     border-top-right-radius: 5px;
     borderradius: 5px;
     width: 70%;
+    height: 25vw;
     overflow: auto;
     color: #434651;
   }
@@ -104,7 +107,7 @@ const Box = styled.div`
   .chat .chat-history {
     padding: 30px 30px 20px;
     border-bottom: 2px solid white;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     height: 575px;
   }
   .chat .chat-history .message-data {
@@ -284,7 +287,6 @@ export default () => {
   if (arrUsers) {
     return (
       <Box>
-        <button onClick={() => {a1()}}>On</button>
         <div className="container clearfix">
           <div className="people-list" id="people-list">
             <div className="search">
@@ -339,7 +341,7 @@ export default () => {
                 setArrMessage={setArrMessage}
               />
             )}
-          </div>
+          </div>  
         </div>
       </Box>
     );
