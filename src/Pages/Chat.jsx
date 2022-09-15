@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import ChatTemple from "./ChatTemple";
 import styled from "styled-components";
 import img from "../Img/img_avatar.png";
+import io from "socket.io-client";
 const axios = require("axios").default;
-
+const ENDPOINT = "http://localhost:3001";
+const socketIOClient = io(ENDPOINT);
 const Box = styled.div`
   @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
   *,
@@ -235,7 +237,15 @@ export default () => {
       .catch(function (error) {
         console.log(error);
       });
+      socketIOClient.on("node-eve", (msg) =>
+      {
+        console.log(msg);
+      })
   }, []);
+  function a1()
+  {
+    socketIOClient.emit("From-Api", "msg")
+  }
   function startChat(paramsUser) {
     localStorage.setItem("chatWith", paramsUser);
     const sorted = [localStorage.getItem("UserName"), paramsUser];
@@ -274,6 +284,7 @@ export default () => {
   if (arrUsers) {
     return (
       <Box>
+        <button onClick={() => {a1()}}>On</button>
         <div className="container clearfix">
           <div className="people-list" id="people-list">
             <div className="search">
@@ -315,6 +326,9 @@ export default () => {
           </div>
 
           <div className="chat-header clearfix">
+            <h1 style={{ textAlign: "center", fontFamily: "cursive" }}>
+              Hello {localStorage.getItem("UserName")} !
+            </h1>
             {arrMessage && (
               <ChatTemple
                 refProp={useref}

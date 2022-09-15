@@ -1,40 +1,34 @@
 // import img from "../Img/img_avatar.png";
 // import { useState, useEffect } from "react";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import io from "socket.io-client";
+const ENDPOINT = "http://localhost:3001";
+const socketIOClient = io(ENDPOINT);
 function ChatTemple(props) {
+  const useref = useRef(null);
 
-  const ENDPOINT = "http://localhost:3001";
-  const options = {
-    rememberUpgrade: true,
-    transports: ["websocket"],
-    secure: true,
-    rejectUnauthorized: false,
-  };
-  const socketIOClient = io(ENDPOINT, options);
+  useEffect(() => {
+    socketIOClient.on("chat message", (message, userConvr) => {
+      if (true) {
+        const newMass = {
+          from: localStorage.getItem("UserName"),
+          messages: message,
+          timeMass: new Date().getHours() + " : " + new Date().getMinutes(),
+        };
+        console.log(message, userConvr);
+        // useref.current.scrollTop = useref.current.clientHeight;
+        // window.scrollTo(0, document.body.scrollHeight);
+        props.setArrMessage((current) => [...current, newMass]);
+      }
+    });
+  }, []);
   function sendMass() {
     socketIOClient.emit(
       "chat message from clinet",
       props.message,
       localStorage.getItem("userConvr")
     );
-
-    socketIOClient.once("chat message", (message, userConvr) => {
-      
-      if (true) {
-        const newMass = {
-          from: localStorage.getItem("UserName"),
-          messages: message,
-          timeMass: new Date().getHours() + " : " + new Date().getMinutes()
-        };
-        console.log(message, userConvr);
-        // props.refProp.current.scrollTop = props.refProp.current.clientHeight;
-        // window.scrollTo(0, document.body.scrollHeight);
-        // props.setArrMessage((current) => [...current, newMass]);
-        // console.log(props.arrMessage);
-      }
-    });
     props.startChat(localStorage.getItem("chatWith"));
   }
   return (
@@ -59,7 +53,10 @@ function ChatTemple(props) {
                 typeof item === "object"
               ) {
                 return (
-                  <li style={{ listStyleType: "none" }}>
+                  <li
+                    ref={item === props.arrMessage.length - 1 ? useref : null}
+                    style={{ listStyleType: "none" }}
+                  >
                     <div className="message-data">
                       <span className="message-data-name">
                         <i className="fa fa-circle online" /> {item.from}
@@ -86,7 +83,6 @@ function ChatTemple(props) {
                 );
               }
             })}
-           
           </ul>
         </div>
       </div>
