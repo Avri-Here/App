@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { Try } from "./Try";
 const axios = require("axios").default;
 
 export default (props) => {
@@ -8,14 +9,18 @@ export default (props) => {
   return (
     <>
       <>
-        <h1 style={{ textAlign: "center", fontFamily: "cursive" }}>{localStorage.getItem("UserName")} Wellcome !</h1>
+        <Try />
+        <h1 style={{ textAlign: "center", fontFamily: "cursive" }}>
+          {localStorage.getItem("UserName")} Wellcome !
+        </h1>
       </>
-      <button style={{ textAlign: "center", fontFamily: "cursive" }}
+      <button
+        style={{ textAlign: "center", fontFamily: "cursive" }}
         onClick={() => {
           navigate("/Sign-In");
         }}
       >
-      Log out
+        Log out
       </button>
 
       <button

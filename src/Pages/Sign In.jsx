@@ -25,7 +25,7 @@ export default (props) => {
         },
       })
 
-      .then(function (response) {
+      .then( (response) => {
         console.log(response.data.message);
         if (response.status === 200) {
           localStorage.setItem("token", response.data.token);
@@ -44,7 +44,7 @@ export default (props) => {
           }, 3500);
         }
       })
-      .catch(function (error) {
+      .catch( (error) => {
         console.log(error);
         setStatus(error.response.data.message || "Erorr !");
       });

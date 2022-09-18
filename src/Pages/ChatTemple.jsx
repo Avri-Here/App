@@ -1,12 +1,9 @@
-// import img from "../Img/img_avatar.png";
-// import { useState, useEffect } from "react";
-
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 const ENDPOINT = "http://localhost:3001";
 const socketIOClient = io(ENDPOINT);
 function ChatTemple(props) {
-  const [message, setMessage] = useState("");
+  const ref = useRef(null);
   useEffect(() => {
     socketIOClient.on("chat message", (message, userConvr) => {
       if (true) {
@@ -16,12 +13,9 @@ function ChatTemple(props) {
           timeMass: new Date().getHours() + " : " + new Date().getMinutes(),
         };
         console.log(message, userConvr);
-        // useref.current.scrollTop = useref.current.clientHeight;
-        let chatWrapper = document.getElementById(
-          props.arrMessage.length - 2 + "aa"
-        );
-        // chatWrapper.scrollTo(0, chatWrapper.innerHeight);
-        // window.scrollTo(0, document.body.scrollHeight);
+        setTimeout(() => {
+          ref.current.scrollIntoView(); 
+        }, 300);
         props.setArrMessage((current) => [...current, newMass]);
       }
     });
@@ -29,22 +23,21 @@ function ChatTemple(props) {
   function sendMass() {
     socketIOClient.emit(
       "chat message from clinet",
-      message,
+      props.message,
       localStorage.getItem("userConvr")
     );
-    setMessage("");
     props.startChat(localStorage.getItem("chatWith"));
   }
   return (
     <>
       <div className="chat-about">
         <div className="chat-with">
-          <h1>Chat with {localStorage.getItem("chatWith")}</h1>
-          <h1>
+          <h2 style={{textAlign:"center", fontFamily:"system-ui"}}>Chat with {localStorage.getItem("chatWith")}</h2>
+          <h4 style={{textAlign:"center", fontFamily:"monospace"}}>
             {typeof props.arrMessage[0] === "object"
               ? "messages sent : " + props.arrMessage.length
               : "No messages have been sent yet"}
-          </h1>
+          </h4>
         </div>
       </div>
       <i className="fa fa-star" />
@@ -59,8 +52,7 @@ function ChatTemple(props) {
                 return (
                   <li
                     key={index}
-                    id={index + "aa"}
-                    style={{ listStyleType: "none" }}
+                    style={{ listStyleType: "none", fontFamily:"sans-serif" }}
                   >
                     <div className="message-data">
                       <span className="message-data-name">
@@ -69,14 +61,19 @@ function ChatTemple(props) {
 
                       <span className="message-data-time">{item.timeMass}</span>
                     </div>
-                    <div className="message my-message">{item.messages}</div>
+                    <div
+                      ref={index == props.arrMessage.length - 1 ? ref : null}
+                      className="message my-message"
+                    >
+                      {item.messages}
+                    </div>
                   </li>
                 );
               } else if (typeof item === "object") {
                 return (
                   <li
                     key={index}
-                    style={{ listStyleType: "none" }}
+                    style={{ listStyleType: "none", fontFamily:"cursive" }}
                     className="clearfix"
                   >
                     <div className="message-data align-right">
@@ -85,7 +82,10 @@ function ChatTemple(props) {
                       <span className="message-data-name">{item.from}</span>
                       <i className="fa fa-circle me" />
                     </div>
-                    <div className="message other-message float-right">
+                    <div
+                      ref={index == props.arrMessage.length - 1 ? ref : null}
+                      className="message other-message float-right"
+                    >
                       {item.messages}
                     </div>
                   </li>
@@ -95,24 +95,27 @@ function ChatTemple(props) {
           </ul>
         </div>
       </div>
+      
+
       <footer>
         <div style={{ marginTop: "15%" }}>
           <textarea
             style={{
-              width: " 887px",
-              height: "67px",
+              width: " 59%",
+              height: "5vw",
               marginTop: "2vw",
-              background: "lightgrey",
+              marginLeft: "20%",
+              marginRight: "20%",
+              background: "floralwhite"
             }}
             name="message-to-send"
             id="message-to-send"
             placeholder="Type your message"
             rows={3}
-            defaultValue={""}
             onChange={(e) => {
-              setMessage(e.target.value);
+              props.setMessage(e.target.value);
             }}
-            value={message}
+            value={props.message}
           />
           <div
             style={{

@@ -29,7 +29,7 @@ export default () => {
           "Content-Type": "application/json",
         },
       })
-      .then(function (response) {
+      .then( (response) => {
         console.log(response.data.message);
         if (response.status === 200) {
           setStatus(
@@ -46,7 +46,7 @@ export default () => {
           }, 3500);
         }
       })
-      .catch(function (error) {
+      .catch( (error) => {
         console.log(error.response.data.erorr);
         if (error.response.data.erorr.code === 11000) {
           setStatus("A user with this name exists in the system !");

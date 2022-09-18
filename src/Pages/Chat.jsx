@@ -1,12 +1,11 @@
+// import { useNavigate } from "react-router-dom";
+
+
+
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import ChatTemple from "./ChatTemple";
-import styled from "styled-components";
-import img from "../Img/img_avatar.png";
-import io from "socket.io-client";
+import styled from "styled-components"
 const axios = require("axios").default;
-const ENDPOINT = "http://localhost:3001";
-const socketIOClient = io(ENDPOINT);
 const Box = styled.div`
   // @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
   *,
@@ -28,7 +27,7 @@ const Box = styled.div`
     overflow: auto;
   }
   .people-list {
-    width: 260px;
+    width: 265px;
     float: left;
   }
   .people-list .search {
@@ -49,9 +48,9 @@ const Box = styled.div`
   }
   .people-list ul {
     padding: 20px;
-    height: 15vw;
-    width: 100%;
-    // overflow: auto:
+    height: 24vw;
+    width: 80%;
+    overflow: auto;
   }
   .people-list ul li {
     padding-bottom: 20px;
@@ -73,9 +72,8 @@ const Box = styled.div`
     float: left;
     background: #f2f5f8;
     border-top-right-radius: 5px;
-    borderradius: 5px;
     width: 70%;
-    height: 25vw;
+    height: 20vw;
     overflow: auto;
     color: #434651;
   }
@@ -215,12 +213,11 @@ const Box = styled.div`
   }
 `;
 
-export default () => {
+export default function () {
   const [message, setMessage] = useState("");
   const [arrUsers, setArrUsers] = useState(null);
   const [arrMessage, setArrMessage] = useState();
-  const useref = useRef(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -233,18 +230,15 @@ export default () => {
           },
         }
       )
-      .then(function (response) {
-        console.log(response);
+      .then((response) => {
         setArrUsers(response.data);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
-      socketIOClient.on("node-eve", (msg) =>
-      {
-        console.log(msg);
-      })
+
   }, []);
+
   function startChat(paramsUser) {
     localStorage.setItem("chatWith", paramsUser);
     const sorted = [localStorage.getItem("UserName"), paramsUser];
@@ -297,7 +291,7 @@ export default () => {
                     <li
                       key={index}
                       className="clearfix"
-                      style={{ listStyleType: "none" }}
+                      style={{ listStyleType: "none", fontFamily:"cursive" }}
                       onClick={() => {
                         startChat(item.userName);
                       }}
@@ -325,12 +319,11 @@ export default () => {
           </div>
 
           <div className="chat-header clearfix">
-            <h1 style={{ textAlign: "center", fontFamily: "cursive" }}>
+            <h2 style={{ textAlign: "center", fontFamily: "system-ui" }}>
               Hello {localStorage.getItem("UserName")} !
-            </h1>
+            </h2>
             {arrMessage && (
               <ChatTemple
-                refProp={useref}
                 arrMessage={arrMessage}
                 startChat={startChat}
                 message={message}
@@ -338,11 +331,11 @@ export default () => {
                 setArrMessage={setArrMessage}
               />
             )}
-          </div>  
+          </div>
         </div>
       </Box>
     );
   } else {
     return <></>;
   }
-};
+}
