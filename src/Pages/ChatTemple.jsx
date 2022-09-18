@@ -1,11 +1,12 @@
 // import img from "../Img/img_avatar.png";
 // import { useState, useEffect } from "react";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import io from "socket.io-client";
 const ENDPOINT = "http://localhost:3001";
 const socketIOClient = io(ENDPOINT);
 function ChatTemple(props) {
+  const [message, setMessage] = useState("");
   useEffect(() => {
     socketIOClient.on("chat message", (message, userConvr) => {
       if (true) {
@@ -19,7 +20,7 @@ function ChatTemple(props) {
         let chatWrapper = document.getElementById(
           props.arrMessage.length - 2 + "aa"
         );
-        chatWrapper.scrollTo(0, chatWrapper.innerHeight);
+        // chatWrapper.scrollTo(0, chatWrapper.innerHeight);
         // window.scrollTo(0, document.body.scrollHeight);
         props.setArrMessage((current) => [...current, newMass]);
       }
@@ -28,9 +29,10 @@ function ChatTemple(props) {
   function sendMass() {
     socketIOClient.emit(
       "chat message from clinet",
-      props.message,
+      message,
       localStorage.getItem("userConvr")
     );
+    setMessage("");
     props.startChat(localStorage.getItem("chatWith"));
   }
   return (
@@ -107,10 +109,10 @@ function ChatTemple(props) {
             placeholder="Type your message"
             rows={3}
             defaultValue={""}
-            value={props.message}
             onChange={(e) => {
-              props.setMessage(e.target.value);
+              setMessage(e.target.value);
             }}
+            value={message}
           />
           <div
             style={{

@@ -235,7 +235,7 @@ export default () => {
       )
       .then(function (response) {
         console.log(response);
-        setArrUsers(response.data.message);
+        setArrUsers(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -245,10 +245,6 @@ export default () => {
         console.log(msg);
       })
   }, []);
-  function a1()
-  {
-    socketIOClient.emit("From-Api", "msg")
-  }
   function startChat(paramsUser) {
     localStorage.setItem("chatWith", paramsUser);
     const sorted = [localStorage.getItem("UserName"), paramsUser];
@@ -294,15 +290,16 @@ export default () => {
               <i className="fa fa-search" />
             </div>
             <ul className="list">
-              {arrUsers.map((item, index) => {
-                if (item !== localStorage.getItem("UserName")) {
+              {arrUsers.message.map((item, index) => {
+                console.log(item);
+                if (item.userName !== localStorage.getItem("UserName")) {
                   return (
                     <li
                       key={index}
                       className="clearfix"
                       style={{ listStyleType: "none" }}
                       onClick={() => {
-                        startChat(item);
+                        startChat(item.userName);
                       }}
                     >
                       <img
@@ -311,11 +308,11 @@ export default () => {
                           height: "auto",
                           borderRadius: "45%",
                         }}
-                        src={img}
+                        src={item.photoUser}
                         alt="avatar"
                       />
                       <div className="about">
-                        <div className="name">{item}</div>
+                        <div className="name">{item.userName}</div>
                         <div className="status">
                           <i className="fa fa-circle online" /> online ? !
                         </div>

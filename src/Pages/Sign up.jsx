@@ -12,21 +12,29 @@ export default () => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
-    // console.log(inputs);
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
+    const a1 = inputs;
+
     event.preventDefault();
+    const response = await fetch("https://picsum.photos/200");
+
+    a1.photoUser = response.url;
+    console.log(a1);
+    setInputs({});
     axios
-      .post("http://localhost:3001/users/signUp", inputs, {
+      .post("http://localhost:3001/users/signUp", a1, {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
       })
       .then(function (response) {
         console.log(response.data.message);
         if (response.status === 200) {
-          setStatus("Your account has been created !  Go now to the login page");
+          setStatus(
+            "Your account has been created !  Go now to the login page"
+          );
           let temp = setInterval(() => {
             setStatus((last) => {
               return last + ". ";
@@ -42,15 +50,11 @@ export default () => {
         console.log(error.response.data.erorr);
         if (error.response.data.erorr.code === 11000) {
           setStatus("A user with this name exists in the system !");
-        }
-
-        else
-        { 
-          setStatus(error.response.data.erorr.errors.userName.message || "Erorr !"
+        } else {
+          setStatus(
+            error.response.data.erorr.errors.userName.message || "Erorr !"
           );
         }
-
-
       });
   }
 
@@ -93,7 +97,6 @@ export default () => {
         Already have an account ?
       </button>
       <h1 style={{ textAlign: "center" }}>{status}</h1>
-      
     </div>
   );
 };
