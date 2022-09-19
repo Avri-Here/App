@@ -2,7 +2,7 @@ import React from "react";
 
 export const Try = () => {
   return (
-    <div>
+      <div>
       <link
         href="https://fonts.googleapis.com/css?family=Asap:400,700"
         rel="stylesheet"
