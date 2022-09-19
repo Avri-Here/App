@@ -5,18 +5,23 @@ const socketIOClient = io(ENDPOINT);
 function ChatTemple(props) {
   const ref = useRef(null);
   useEffect(() => {
+    
     socketIOClient.on("chat message", (message, userConvr) => {
-      if (true) {
+      
+      if (localStorage.getItem("userConvr") === userConvr) {
         const newMass = {
           from: localStorage.getItem("UserName"),
           messages: message,
-          timeMass: new Date().getHours() + " : " + new Date().getMinutes(),
+          timeMass: new Date().getHours() + " : " + new Date().getMinutes()
         };
-        console.log(message, userConvr);
+        // console.log(message, userConvr);
         setTimeout(() => {
-          ref.current.scrollIntoView(); 
-        }, 300);
+          ref.current.scrollIntoView();
+        }, 500);
         props.setArrMessage((current) => [...current, newMass]);
+        // props.setArrMessage(newMass);
+        // console.log(props.arrMessage);
+
       }
     });
   }, []);
@@ -26,14 +31,17 @@ function ChatTemple(props) {
       props.message,
       localStorage.getItem("userConvr")
     );
+
     props.startChat(localStorage.getItem("chatWith"));
   }
   return (
     <>
       <div className="chat-about">
         <div className="chat-with">
-          <h2 style={{textAlign:"center", fontFamily:"system-ui"}}>Chat with {localStorage.getItem("chatWith")}</h2>
-          <h4 style={{textAlign:"center", fontFamily:"monospace"}}>
+          <h2 style={{ textAlign: "center", fontFamily: "system-ui" }}>
+            Chat with {localStorage.getItem("chatWith")}
+          </h2>
+          <h4 style={{ textAlign: "center", fontFamily: "monospace" }}>
             {typeof props.arrMessage[0] === "object"
               ? "messages sent : " + props.arrMessage.length
               : "No messages have been sent yet"}
@@ -52,7 +60,7 @@ function ChatTemple(props) {
                 return (
                   <li
                     key={index}
-                    style={{ listStyleType: "none", fontFamily:"sans-serif" }}
+                    style={{ listStyleType: "none", fontFamily: "sans-serif" }}
                   >
                     <div className="message-data">
                       <span className="message-data-name">
@@ -73,7 +81,7 @@ function ChatTemple(props) {
                 return (
                   <li
                     key={index}
-                    style={{ listStyleType: "none", fontFamily:"cursive" }}
+                    style={{ listStyleType: "none", fontFamily: "cursive" }}
                     className="clearfix"
                   >
                     <div className="message-data align-right">
@@ -95,7 +103,6 @@ function ChatTemple(props) {
           </ul>
         </div>
       </div>
-      
 
       <footer>
         <div style={{ marginTop: "15%" }}>
@@ -106,7 +113,7 @@ function ChatTemple(props) {
               marginTop: "2vw",
               marginLeft: "20%",
               marginRight: "20%",
-              background: "floralwhite"
+              background: "floralwhite",
             }}
             name="message-to-send"
             id="message-to-send"

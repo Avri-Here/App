@@ -1,10 +1,8 @@
 // import { useNavigate } from "react-router-dom";
 
-
-
 import { useState, useEffect, useRef } from "react";
 import ChatTemple from "./ChatTemple";
-import styled from "styled-components"
+import styled from "styled-components";
 const axios = require("axios").default;
 const Box = styled.div`
   // @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
@@ -236,10 +234,13 @@ export default function () {
       .catch((error) => {
         console.log(error);
       });
-
   }, []);
 
-  function startChat(paramsUser) {
+  function startChat(paramsUser, newMass) {
+    // if (message) {
+    //   setArrMessage((current) => [...current, newMass]);
+    // }
+    console.log(arrMessage);
     localStorage.setItem("chatWith", paramsUser);
     const sorted = [localStorage.getItem("UserName"), paramsUser];
     const orderArry = sorted.sort((a, b) => a.localeCompare(b));
@@ -285,13 +286,13 @@ export default function () {
             </div>
             <ul className="list">
               {arrUsers.message.map((item, index) => {
-                console.log(item);
+                // console.log(item);
                 if (item.userName !== localStorage.getItem("UserName")) {
                   return (
                     <li
                       key={index}
                       className="clearfix"
-                      style={{ listStyleType: "none", fontFamily:"cursive" }}
+                      style={{ listStyleType: "none", fontFamily: "cursive" }}
                       onClick={() => {
                         startChat(item.userName);
                       }}
