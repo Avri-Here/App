@@ -107,6 +107,7 @@ export default (props) => {
         }}
         onClick={() => {
           navigate("/Sign-Up");
+          // navigate("http://localhost:3001/SignUp.html");
         }}
       >
         Do not have an account ?

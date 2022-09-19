@@ -5,30 +5,27 @@ const socketIOClient = io(ENDPOINT);
 function ChatTemple(props) {
   const ref = useRef(null);
   useEffect(() => {
-    
     socketIOClient.on("chat message", (message, userConvr) => {
-      
       if (localStorage.getItem("userConvr") === userConvr) {
-        const newMass = {
-          from: localStorage.getItem("UserName"),
-          messages: message,
-          timeMass: new Date().getHours() + " : " + new Date().getMinutes()
-        };
-        // console.log(message, userConvr);
+
+        props.setArrMessage((current) => [...current, message]);
+
         setTimeout(() => {
           ref.current.scrollIntoView();
-        }, 500);
-        props.setArrMessage((current) => [...current, newMass]);
-        // props.setArrMessage(newMass);
-        // console.log(props.arrMessage);
+        }, 300);
 
       }
     });
   }, []);
   function sendMass() {
+    const newMass = {
+      from: localStorage.getItem("UserName"),
+      messages: props.message,
+      timeMass: new Date().getHours() + " : " + new Date().getMinutes()
+    };
     socketIOClient.emit(
       "chat message from clinet",
-      props.message,
+      newMass,
       localStorage.getItem("userConvr")
     );
 
@@ -64,13 +61,13 @@ function ChatTemple(props) {
                   >
                     <div className="message-data">
                       <span className="message-data-name">
-                        <i className="fa fa-circle online" /> {item.from}
+                        <i className="fa fa-circle online" /> You
                       </span>
 
                       <span className="message-data-time">{item.timeMass}</span>
                     </div>
                     <div
-                      ref={index == props.arrMessage.length - 1 ? ref : null}
+                      ref={index === props.arrMessage.length - 1 ? ref : null}
                       className="message my-message"
                     >
                       {item.messages}
@@ -91,7 +88,7 @@ function ChatTemple(props) {
                       <i className="fa fa-circle me" />
                     </div>
                     <div
-                      ref={index == props.arrMessage.length - 1 ? ref : null}
+                      ref={index === props.arrMessage.length - 1 ? ref : null}
                       className="message other-message float-right"
                     >
                       {item.messages}

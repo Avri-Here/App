@@ -236,11 +236,7 @@ export default function () {
       });
   }, []);
 
-  function startChat(paramsUser, newMass) {
-    // if (message) {
-    //   setArrMessage((current) => [...current, newMass]);
-    // }
-    console.log(arrMessage);
+  function startChat(paramsUser) {
     localStorage.setItem("chatWith", paramsUser);
     const sorted = [localStorage.getItem("UserName"), paramsUser];
     const orderArry = sorted.sort((a, b) => a.localeCompare(b));
@@ -264,14 +260,19 @@ export default function () {
         }
       )
       .then((response) => {
-        if (!message) {
-          setArrMessage(response.data.messages[0].messages);
-          console.log(response);
+        if (message == "") {
+          try {
+            setArrMessage(response.data.messages[0].messages);
+            console.log(response);
+          } catch (error) {
+            setArrMessage([]);
+          }
         }
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
+
     setMessage("");
   }
 
@@ -286,7 +287,6 @@ export default function () {
             </div>
             <ul className="list">
               {arrUsers.message.map((item, index) => {
-                // console.log(item);
                 if (item.userName !== localStorage.getItem("UserName")) {
                   return (
                     <li

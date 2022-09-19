@@ -26,10 +26,11 @@ export default function Router() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <BrowserRouter>
-    <br/>
-    <br/>
+      <br />
+      <br />
       <Routes>
-      <Route path="" element={<SignIn setName={dispatch} />} />
+
+        <Route path="" element={<SignIn setName={dispatch} />} />
         <Route path="Sign-Up" element={<SignUp />} />
         <Route path="Sign-In" element={<SignIn setName={dispatch} />} />
         <Route
@@ -38,9 +39,7 @@ export default function Router() {
         />
         <Route
           path="ChatHere"
-          element={
-            <Chat name={state.userName} setName={dispatch} />
-          }
+          element={<Chat name={state.userName} setName={dispatch} />}
         />
         <Route
           path="Account_Settings"
@@ -49,7 +48,6 @@ export default function Router() {
           }
         />
         {/* <Route path="*" element={<NoPage />} /> */}
-        
       </Routes>
     </BrowserRouter>
   );
