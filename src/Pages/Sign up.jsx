@@ -1,13 +1,9 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-const axios = require("axios").default;
+import { useEffect } from "react";
 
 export default () => {
   useEffect(() => {
-    setTimeout(() => {
       window.location.replace("http://localhost:3001/SignUp.html");
-    }, 1000);
+
   }, []);
-  return <h1>Move ..</h1>;
+  return <h1></h1>;
 };

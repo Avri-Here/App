@@ -104,7 +104,7 @@ const Box = styled.div`
     padding: 30px 30px 20px;
     border-bottom: 2px solid white;
     // overflow-y: scroll;
-    height: 575px;
+    min-height: 300px;
   }
   .chat .chat-history .message-data {
     margin-bottom: 15px;
@@ -252,11 +252,7 @@ export default function () {
           token: localStorage.getItem("token"),
           idWith: paramsUser,
           message: message,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers : { "Content-Type": "application/json"}
         }
       )
       .then((response) => {

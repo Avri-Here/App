@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import img from "../Img/Img1.jpg";
+import img from "../Img/img_avatar.png";
 
 const axios = require("axios").default;
 

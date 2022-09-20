@@ -2,13 +2,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useReducer } from "react";
 
-import Layout from "./Pages/Layout";
+// import Layout from "./Pages/Layout";
 import SignUp from "./Pages/Sign up";
 import SignIn from "./Pages/Sign In";
 import HomePage from "./Pages/HomePage";
 import Account_Settings from "./Pages/Account_Settings";
 import Chat from "./Pages/Chat";
-import App from "./Pages/Try";
 
 // import NoPage from "./pages/NoPage";
 const initialState = { userName: "" };

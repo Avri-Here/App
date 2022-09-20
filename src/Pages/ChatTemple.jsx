@@ -7,21 +7,23 @@ function ChatTemple(props) {
   useEffect(() => {
     socketIOClient.on("chat message", (message, userConvr) => {
       if (localStorage.getItem("userConvr") === userConvr) {
-
         props.setArrMessage((current) => [...current, message]);
-
-        setTimeout(() => {
-          ref.current.scrollIntoView();
-        }, 300);
-
+        console.log(props.arrMessage.length);
       }
     });
   }, []);
+  useEffect(() => {
+    if (props.arrMessage.length > 4) {
+      setTimeout(() => {
+        ref.current.scrollIntoView();
+      }, 300);
+    }
+  }, [props.arrMessage]);
   function sendMass() {
     const newMass = {
       from: localStorage.getItem("UserName"),
       messages: props.message,
-      timeMass: new Date().getHours() + " : " + new Date().getMinutes()
+      timeMass: new Date().getHours() + " : " + new Date().getMinutes(),
     };
     socketIOClient.emit(
       "chat message from clinet",
@@ -131,15 +133,10 @@ function ChatTemple(props) {
               border: "3px solid green",
               borderRadius: "3vw",
               marginLeft: "34%",
+              fontSize:"20px"
             }}
-          >
-            <button
-              onClick={() => {
-                sendMass();
-              }}
-            >
-              Send
-            </button>
+          onClick={sendMass}>Send
+            
           </div>
         </div>
       </footer>

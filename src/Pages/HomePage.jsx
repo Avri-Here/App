@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { Try } from "./Try";
 const axios = require("axios").default;
 
 export default (props) => {
@@ -9,7 +8,6 @@ export default (props) => {
   return (
     <>
       <>
-        <Try />
         <h1 style={{ textAlign: "center", fontFamily: "cursive" }}>
           {localStorage.getItem("UserName")} Wellcome !
         </h1>
