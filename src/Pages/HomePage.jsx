@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import PrimarySearchAppBar from "./App Bar";
 const axios = require("axios").default;
 
-export default (props) => {
+export default () => {
   const navigate = useNavigate();
 
   return (
     <>
+    <PrimarySearchAppBar/>
       <>
         <h1 style={{ textAlign: "center", fontFamily: "cursive" }}>
           {localStorage.getItem("UserName")} Wellcome !
