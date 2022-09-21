@@ -39,8 +39,8 @@ export default (props) => {
           console.log(response);
           setTimeout(() => {
             clearInterval(temp);
-            // navigate("/ChatHere");
             navigate("/HomePage");
+            props.reducer({ type: "showNav", showNav: true })
           }, 3500);
         }
       })
@@ -107,7 +107,6 @@ export default (props) => {
         }}
         onClick={() => {
           navigate("/Sign-Up");
-          // navigate("http://localhost:3001/SignUp.html");
         }}
       >
         Do not have an account ?

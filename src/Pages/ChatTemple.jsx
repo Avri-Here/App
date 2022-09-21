@@ -52,11 +52,13 @@ function ChatTemple(props) {
         <div className="chat-history">
           <ul>
             {props.arrMessage.map((item, index) => {
+              console.log(item);
               if (
                 item.from === localStorage.getItem("UserName") &&
                 typeof item === "object"
               ) {
                 return (
+                  
                   <li
                     key={index}
                     style={{ listStyleType: "none", fontFamily: "sans-serif" }}
@@ -67,6 +69,7 @@ function ChatTemple(props) {
                       </span>
 
                       <span className="message-data-time">{item.timeMass}</span>
+                      <h5 style={{direction:"rtl"}} className="message-data-time">{!item.isRead ? "לא נקרא" : "נקרא"}</h5>
                     </div>
                     <div
                       ref={index === props.arrMessage.length - 1 ? ref : null}

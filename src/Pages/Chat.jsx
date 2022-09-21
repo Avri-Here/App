@@ -259,6 +259,7 @@ export default function () {
         if (message == "") {
           try {
             setArrMessage(response.data.messages[0].messages);
+            
             console.log(response);
           } catch (error) {
             setArrMessage([]);
