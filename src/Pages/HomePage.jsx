@@ -8,7 +8,6 @@ export default () => {
 
   return (
     <>
-    <PrimarySearchAppBar/>
       <>
         <h1 style={{ textAlign: "center", fontFamily: "cursive" }}>
           {localStorage.getItem("UserName")} Wellcome !

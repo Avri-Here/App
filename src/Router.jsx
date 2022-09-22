@@ -6,6 +6,7 @@ import PrimarySearchAppBar from "./Pages/App Bar";
 import SignUp from "./Pages/Sign up";
 import SignIn from "./Pages/Sign In";
 import HomePage from "./Pages/HomePage";
+import Sale from "./Pages/Sale";
 import Account_Settings from "./Pages/Account_Settings";
 import Chat from "./Pages/Chat";
 const UserContext = createContext();
@@ -32,17 +33,19 @@ export default function Router() {
         {/* <Component2 user={user} /> */}
 
         {state.showNav && <PrimarySearchAppBar />}
-
-        <BrowserRouter>
           <br />
           <br />
           <Routes>
-            <Route path="" element={<SignIn setName={dispatch} />} />
+            <Route path="" element={<SignIn reducer={dispatch} />} />
             <Route path="Sign-Up" element={<SignUp />} />
             <Route path="Sign-In" element={<SignIn reducer={dispatch} />} />
             <Route
               path="HomePage"
               element={<HomePage name={state.userName} setName={dispatch} />}
+            />
+            <Route
+              path="Sale"
+              element={<Sale />}
             />
             <Route
               path="ChatHere"
@@ -56,7 +59,6 @@ export default function Router() {
             />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Routes>
-        </BrowserRouter>
       </UserContext.Provider>
     </>
   );

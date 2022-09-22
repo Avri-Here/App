@@ -9,12 +9,13 @@ import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 const axios = require("axios").default;
 
 export default function DeleteAc() {
   const [status, setStatus] = useState(null);
+  const ref = useRef(null);
   const navigate = useNavigate();
   function deleteUser() {
     const obb = { token: localStorage.getItem("token") };
@@ -26,22 +27,24 @@ export default function DeleteAc() {
       })
       .then((response) => {
         console.log(response);
+        ref.current.style.display = "none"
         setStatus(true);
         setTimeout(() => {
           navigate("/Sign-In");
-        }, 5000);
+        }, 3000);
       })
       .catch((error) => {
         setStatus(false);
+        ref.current.style.display = "none"
         setTimeout(() => {
-          navigate("./");
-        }, 3000);
+          window.location.reload(false);
+        }, 2500);
         console.log(error);
       });
   }
   return (
     <>
-      <Card sx={{ maxWidth: 450 }}>
+      <Card ref={ref} sx={{ maxWidth: 450 }}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -83,8 +86,6 @@ export default function DeleteAc() {
       </Card>
       {status === true ? (
         <Stack
-          sx={{ width: "50%" }}
-          style={{ marginLeft: "28%", marginRight: "-20vw", marginTop: "3vw" }}
           spacing={2}
         >
           <Alert severity="success">
@@ -95,8 +96,6 @@ export default function DeleteAc() {
         </Stack>
       ) : status === false ? (
         <Stack
-          sx={{ width: "50%" }}
-          style={{ marginLeft: "28%", marginRight: "-20vw", marginTop: "3vw" }}
           spacing={2}
         >
           <Alert severity="error">
