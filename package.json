@@ -9,6 +9,8 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.6",
     "axios": "^0.27.2",
+    "bootstrap": "^5.2.1",
+    "botstrap": "^0.20.1",
     "cra-template": "1.2.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",

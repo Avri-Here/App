@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import img from "../Img/img_avatar.png";
 
@@ -8,6 +8,9 @@ export default (props) => {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
   const [status, setStatus] = useState("");
+  useEffect(() => {
+    props.reducer({ type: "showNav", showNav: false });
+  }, []);
 
   function handleChange(event) {
     const name = event.target.name;
@@ -25,7 +28,7 @@ export default (props) => {
         },
       })
 
-      .then( (response) => {
+      .then((response) => {
         console.log(response.data.message);
         if (response.status === 200) {
           localStorage.setItem("token", response.data.token);
@@ -40,11 +43,11 @@ export default (props) => {
           setTimeout(() => {
             clearInterval(temp);
             navigate("/HomePage");
-            props.reducer({ type: "showNav", showNav: true })
-          }, 3500);
+            props.reducer({ type: "showNav", showNav: true });
+          }, 3000);
         }
       })
-      .catch( (error) => {
+      .catch((error) => {
         console.log(error);
         setStatus(error.response.data.message || "Erorr !");
       });
