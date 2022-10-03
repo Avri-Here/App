@@ -1,5 +1,5 @@
 // import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useReducer, useState } from "react";
 import PrimarySearchAppBar from "./Pages/App Bar";
 
@@ -10,6 +10,7 @@ import Sale from "./Pages/Sale";
 import Account_Settings from "./Pages/Account_Settings";
 import Chat from "./Pages/Chat";
 import FileUploadPage from "./Pages/FileUploadPage";
+import News from "./Pages/News";
 
 // import NoPage from "./pages/NoPage";
 const initialState = { userName: "", showNav: false };
@@ -32,6 +33,7 @@ export default function Router() {
       {state.showNav && <PrimarySearchAppBar reducer={dispatch} />}
       <br />
       <br />
+      
       <Routes>
         <Route path="" element={<SignIn reducer={dispatch} />} />
         <Route path="Sign-Up" element={<SignUp />} />
@@ -46,6 +48,7 @@ export default function Router() {
           element={<Chat name={state.userName} setName={dispatch} />}
         />
         <Route path="FileUploadPage" element={<FileUploadPage />} />
+        <Route path="News" element={<News />} />
         <Route
           path="Account_Settings"
           element={
