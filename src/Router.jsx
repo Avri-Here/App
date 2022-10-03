@@ -9,6 +9,7 @@ import HomePage from "./Pages/HomePage";
 import Sale from "./Pages/Sale";
 import Account_Settings from "./Pages/Account_Settings";
 import Chat from "./Pages/Chat";
+import FileUploadPage from "./Pages/FileUploadPage";
 
 // import NoPage from "./pages/NoPage";
 const initialState = { userName: "", showNav: false };
@@ -44,6 +45,7 @@ export default function Router() {
           path="ChatHere"
           element={<Chat name={state.userName} setName={dispatch} />}
         />
+        <Route path="FileUploadPage" element={<FileUploadPage />} />
         <Route
           path="Account_Settings"
           element={
@@ -52,7 +54,6 @@ export default function Router() {
         />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
-      {/* </UserContext.Provider> */}
     </>
   );
 }

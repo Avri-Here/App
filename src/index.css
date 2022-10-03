@@ -1,8 +1,7 @@
-#newPaa
-{
-    width: 20vw;
-    position: absolute;
-    right: 8vw;
+#newPaa {
+  width: 20vw;
+  position: absolute;
+  right: 8vw;
 }
 /* #allDivsett
 {
@@ -10,7 +9,8 @@
     display: flex;
     justify-content: space-around;
 } */
-body
-{
-    background-color: aliceblue;
+body {
+  background-color: aliceblue;
 }
+
+
