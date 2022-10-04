@@ -13,7 +13,7 @@ import FileUploadPage from "./Pages/FileUploadPage";
 import News from "./Pages/News";
 
 // import NoPage from "./pages/NoPage";
-const initialState = { userName: "", showNav: false };
+const initialState = { userName: "", showNav: true };
 
 function reducer(state, action) {
   switch (action.type) {
@@ -33,27 +33,19 @@ export default function Router() {
       {state.showNav && <PrimarySearchAppBar reducer={dispatch} />}
       <br />
       <br />
-      
+
       <Routes>
-        <Route path="" element={<SignIn reducer={dispatch} />} />
         <Route path="Sign-Up" element={<SignUp />} />
+        <Route path="" element={<SignIn reducer={dispatch} />} />
         <Route path="Sign-In" element={<SignIn reducer={dispatch} />} />
-        <Route
-          path="HomePage"
-          element={<HomePage name={state.userName} setName={dispatch} />}
-        />
+        <Route path="HomePage" element={<HomePage name={state.userName} />} />
         <Route path="Sale" element={<Sale />} />
-        <Route
-          path="ChatHere"
-          element={<Chat name={state.userName} setName={dispatch} />}
-        />
+        <Route path="ChatHere" element={<Chat name={state.userName} />} />
         <Route path="FileUploadPage" element={<FileUploadPage />} />
         <Route path="News" element={<News />} />
         <Route
           path="Account_Settings"
-          element={
-            <Account_Settings name={state.userName} reducer={dispatch} />
-          }
+          element={<Account_Settings name={state.userName} />}
         />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>

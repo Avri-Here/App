@@ -14,7 +14,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function AlertDialogSlide(props) {
   const navigate = useNavigate();
-  
 
   const Disagree = () => {
     navigate("/HomePage");
@@ -28,17 +27,40 @@ export default function AlertDialogSlide(props) {
         keepMounted
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle style={{ direction: "rtl" }}>{"  תוכן זה נטען דרך אתר ממקור אחר, להמשיך ?"}</DialogTitle>
+        <DialogTitle style={{ direction: "rtl" }}>
+          {"  תוכן זה נטען דרך אתר ממקור אחר, להמשיך ?"}
+        </DialogTitle>
         <DialogContent style={{ direction: "rtl" }}>
           <DialogContentText id="alert-dialog-slide-description">
-        מבזקי חדשות אלו נלקחו מאתר אינטרנט אחר ללא היתר מפורש ושלא כדין, הצפייה בתוכן עלולה להוות עבירה פלילית או עילה לתביעה, בלחיצה על המשך אתם מאשרים שקראתם הודעה זו ואתם מבינים את ההשלכות.
+            מבזקי חדשות אלו נלקחו מאתר אינטרנט אחר ללא היתר מפורש ושלא כדין,
+            הצפייה בתוכן עלולה להוות עבירה פלילית או עילה לתביעה, בלחיצה על המשך
+            אתה מאשר שהודעה זו נקראה ואתה מבין את ההשלכות .
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={Disagree} style={{ direction: "rtl" }}>איני מסכים !</Button>
-          <Button onClick={props.loudNews} style={{ direction: "rtl" }}>מסכים ! המשך ..</Button>
+          <Button
+            onClick={props.loudNews}
+            style={{ direction: "rtl", fontSize: "1rem" }}
+          >
+            המשך בכל אופן !
+          </Button>
+        </DialogActions>
+        <DialogActions>
+          <Button
+            onClick={Disagree}
+            style={{ direction: "rtl", fontSize: "1rem" }}
+          >
+           חזרה לחוף מבטחים ..
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
 }
+
+
+
+
+
+
+

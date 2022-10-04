@@ -24,8 +24,11 @@ export default function News() {
       sessionStorage.setItem("newsArr", JSON.stringify(res.data.News));
     });
   }, []);
+
   return arrNews ? (
     <>
+    <h1 style={{ textAlign: "center", direction:"rtl" }}>מבזקים כל רגע !</h1>
+    <br/>
       <List
         style={{ direction: "rtl" }}
         sx={{ width: "100%", maxWidth: "90%", margin: "auto" }}
@@ -33,10 +36,10 @@ export default function News() {
         {arrNews.map((item, index) => {
           return (
             <>
-              <Box sx={{ width: "75%", margin: "auto" }}>
-                <LinearProgress />
+              <Box sx={{ width: "5%", margin: "auto" }}>
+                <LinearProgress  />
               </Box>
-              {/* <LinearProgress color="inherit" /> */}
+              
               <div style={{ textAlign: "center" }}>
                 <ListItem key={index} alignItems="flex-start">
                   <ListItemText
