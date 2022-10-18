@@ -11,9 +11,14 @@ import Account_Settings from "./Pages/Account_Settings";
 import Chat from "./Pages/Chat";
 import FileUploadPage from "./Pages/FileUploadPage";
 import News from "./Pages/News";
+import TodoList from "./Pages/TodoList";
 
 // import NoPage from "./pages/NoPage";
-const initialState = { userName: "", showNav: true };
+const initialState = {
+  userName: "",
+  showNav: true,
+  NotificationsIconAlertNav: 0,
+};
 
 function reducer(state, action) {
   switch (action.type) {
@@ -21,8 +26,10 @@ function reducer(state, action) {
       return { userName: action.name };
     case "showNav":
       return { showNav: action.showNav };
+    case "NotificationsIconAlertNav":
+      return { NotificationsIconAlertNav: action.NotificationsIconAlertNav };
     default:
-      return state.showNav;
+      return;
   }
 }
 
@@ -30,7 +37,7 @@ export default function Router() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <>
-      {state.showNav && <PrimarySearchAppBar reducer={dispatch} />}
+      {state.showNav && <PrimarySearchAppBar reducer={dispatch} stateGlobal={state} />}
       <br />
       <br />
 
@@ -40,6 +47,11 @@ export default function Router() {
         <Route path="Sign-In" element={<SignIn reducer={dispatch} />} />
         <Route path="HomePage" element={<HomePage name={state.userName} />} />
         <Route path="Sale" element={<Sale />} />
+        <Route
+          path="TodoList"
+          reducer={dispatch}
+          element={<TodoList />}
+        />
         <Route path="ChatHere" element={<Chat name={state.userName} />} />
         <Route path="FileUploadPage" element={<FileUploadPage />} />
         <Route path="News" element={<News />} />

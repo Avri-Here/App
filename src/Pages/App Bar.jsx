@@ -47,6 +47,7 @@ export default function PrimarySearchAppBar(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  console.log(props.stateGlobal.NotificationsIconAlertNav);
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -159,7 +160,7 @@ export default function PrimarySearchAppBar(props) {
               aria-label="show 4 new mails"
               color="inherit"
             >
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={2} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
@@ -168,7 +169,8 @@ export default function PrimarySearchAppBar(props) {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={6} color="error">
+              
+              <Badge badgeContent={props.stateGlobal.NotificationsIconAlertNav} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
