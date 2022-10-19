@@ -10,7 +10,13 @@ export default (props) => {
   const [status, setStatus] = useState("");
   useEffect(() => {
     props.reducer({ type: "showNav", showNav: false });
+    
   }, []);
+  useEffect(() => {
+    console.log(props.state);
+    
+  });
+  
 
   function handleChange(event) {
     const name = event.target.name;

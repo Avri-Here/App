@@ -23,11 +23,11 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "setUserName":
-      return { userName: action.name };
+      return { ...state, userName: action.name };
     case "showNav":
-      return { showNav: action.showNav };
+      return {...state, showNav: action.showNav };
     case "NotificationsIconAlertNav":
-      return { NotificationsIconAlertNav: action.NotificationsIconAlertNav };
+      return {...state, NotificationsIconAlertNav: action.NotificationsIconAlertNav };
     default:
       return;
   }
@@ -37,21 +37,19 @@ export default function Router() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <>
-      {state.showNav && <PrimarySearchAppBar reducer={dispatch} stateGlobal={state} />}
+      {state.showNav && (
+        <PrimarySearchAppBar reducer={dispatch} stateGlobal={state} />
+      )}
       <br />
       <br />
 
       <Routes>
         <Route path="Sign-Up" element={<SignUp />} />
-        <Route path="" element={<SignIn reducer={dispatch} />} />
-        <Route path="Sign-In" element={<SignIn reducer={dispatch} />} />
+        <Route path="" element={<SignIn reducer={dispatch}  state={state}/>} />
+        <Route path="Sign-In" element={<SignIn reducer={dispatch} state={state} />} />
         <Route path="HomePage" element={<HomePage name={state.userName} />} />
         <Route path="Sale" element={<Sale />} />
-        <Route
-          path="TodoList"
-          reducer={dispatch}
-          element={<TodoList />}
-        />
+        <Route path="TodoList" element={<TodoList reducer={dispatch} state={state} />} />
         <Route path="ChatHere" element={<Chat name={state.userName} />} />
         <Route path="FileUploadPage" element={<FileUploadPage />} />
         <Route path="News" element={<News />} />

@@ -114,10 +114,6 @@ const Box = styled.div`
   }
 `;
 export default (props) => {
-  useEffect(() =>
-  {
-    console.log(props);
-  })
   const [taskArr, setTaskArr] = useState([]);
   const [showAlert, setShowAlert] = useState([false, false, false]);
   const [txt, setText] = useState("");
@@ -231,7 +227,7 @@ export default (props) => {
           }}
         >
           <br />
-          <AlertTask reducer={props.reducer} />
+          <AlertTask reducer={props.reducer} state={props.state} />
           <br />
         </div>
 
