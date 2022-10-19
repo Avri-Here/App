@@ -11,7 +11,6 @@ import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import AvatarGroup from "@mui/material/AvatarGroup";
 
 export default function RecipeReviewCard(props) {
   const [expanded, setExpanded] = React.useState(false);
@@ -37,11 +36,6 @@ export default function RecipeReviewCard(props) {
               <img src={props.item.images[0]} />
             </Avatar>
           }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
           title={props.item.title}
           subheader={props.item.brand}
         />
@@ -52,9 +46,7 @@ export default function RecipeReviewCard(props) {
           alt="Paella dish"
         />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {props.item.description}
-          </Typography>
+          <Typography variant="body2" color="text.secondary"></Typography>
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites" onClick={addToFavorites}>

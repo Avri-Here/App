@@ -10,11 +10,18 @@ body {
   margin: 0;
   font-family: system-ui;
   font-weight: 400;
-  /* font-size: initial; */
   line-height: 1.43;
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.01071em;
   color: rgba(0, 0, 0, 0.87);
   display: inline;
+}
+.col
+{
+  margin-bottom: 2vw;
+}
+.MuiGrid2-root
+{
+  margin: auto;
 }

@@ -20,18 +20,15 @@ export default function FormDialog(props) {
         type: "NotificationsIconAlertNav",
         NotificationsIconAlertNav: 1,
       });
-      console.log(valueAlert);  
-      if(localStorage.getItem("valueAlertArr"))
-      {
+      console.log(valueAlert);
+      if (localStorage.getItem("valueAlertArr")) {
         let tempArr = JSON.parse(localStorage.getItem("valueAlertArr"));
         tempArr.push(valueAlert);
-        localStorage.setItem("valueAlertArr", JSON.stringify(tempArr) );
-      }
-      else
-      {
+        localStorage.setItem("valueAlertArr", JSON.stringify(tempArr));
+      } else {
         valueAlertArr.push(valueAlert);
-        localStorage.setItem("valueAlertArr", JSON.stringify(valueAlertArr) );
-      } 
+        localStorage.setItem("valueAlertArr", JSON.stringify(valueAlertArr));
+      }
 
       // }
     });
@@ -85,13 +82,13 @@ export default function FormDialog(props) {
             id="name"
             label="Time & Date"
             fullWidth
+            autoComplete="off"
             value={alertMe}
             onChange={(e) => {
               setAlertMe(e.target.value);
             }}
           />
           <TextField
-            autoFocus
             margin="dense"
             type="text"
             fullWidth

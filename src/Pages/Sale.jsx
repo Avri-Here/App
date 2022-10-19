@@ -20,20 +20,7 @@ export default function RowAndColumnSpacing() {
     console.log("arr = ", arr);
   }, [arr]);
   return (
-    <>
-      {addToCart && (
-        <AvatarGroup max={4}>
-          {addToCart.map((item, index) => {
-            return (
-              <Avatar
-                key={index}
-                alt="Trevor Henderson"
-                src={item}
-              />
-            );
-          })}
-        </AvatarGroup>
-      )}
+    <div id="alla">
       <Box sx={{ width: "100%" }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {arr && (
@@ -54,6 +41,6 @@ export default function RowAndColumnSpacing() {
           )}
         </Grid>
       </Box>
-    </>
+    </div>
   );
 }
