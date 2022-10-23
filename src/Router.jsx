@@ -32,7 +32,8 @@ function reducer(state, action) {
     case "NotificationsIconAlertNav":
       return {
         ...state,
-        NotificationsIconAlertNav: action.NotificationsIconAlertNav,
+        NotificationsIconAlertNav:
+          action.NotificationsIconAlertNav + state.NotificationsIconAlertNav
       };
     default:
       return;

@@ -18,15 +18,12 @@ function SimpleDialog(props) {
   const handleClose = () => {
     onClose(selectedValue);
     localStorage.removeItem("valueAlertArr");
-    text.current = "אין משימות !";
     setMsg([]);
   };
 
   useEffect(() => {
     if (localStorage.getItem("valueAlertArr")) {
       setMsg(JSON.parse(localStorage.getItem("valueAlertArr")));
-    } else {
-      text.current = "אין משימות !";
     }
   }, []);
 

@@ -249,8 +249,8 @@ export default (props) => {
               className="img-fluid"
               alt="Responsive image"
               style={{
-                width: "11vw",
-                height: "10vw",
+                width: "7vw",
+                height: "5vw",
                 border: "5px solid mediumslateblue",
                 borderRadius: "5vw",
               }}
@@ -270,8 +270,8 @@ export default (props) => {
               className="img-fluid"
               alt="Responsive image"
               style={{
-                width: "11vw",
-                height: "10vw",
+                width: "7vw",
+                height: "5vw",
                 border: "5px solid mediumslateblue",
                 borderRadius: "5vw",
               }}
@@ -291,8 +291,8 @@ export default (props) => {
               className="img-fluid"
               alt="Responsive image"
               style={{
-                width: "11vw",
-                height: "10vw",
+                width: "7vw",
+                height: "5vw",
                 border: "5px solid mediumslateblue",
                 borderRadius: "5vw",
               }}

@@ -149,7 +149,7 @@ export default function PrimarySearchAppBar(props) {
               component="div"
               sx={{ display: { xs: "none", sm: "block" } }}
             >
-              My App !
+              Avri's App !
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>

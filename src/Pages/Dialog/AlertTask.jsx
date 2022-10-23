@@ -18,7 +18,7 @@ export default function FormDialog(props) {
       // if (localStorage.getItem("userConvr") === user) {
       props.reducer({
         type: "NotificationsIconAlertNav",
-        NotificationsIconAlertNav: 1,
+        NotificationsIconAlertNav: 1
       });
       console.log(valueAlert);
       if (localStorage.getItem("valueAlertArr")) {
@@ -91,6 +91,7 @@ export default function FormDialog(props) {
           <TextField
             margin="dense"
             type="text"
+            label="Info"
             fullWidth
             value={valueAlert}
             onChange={(e) => {
