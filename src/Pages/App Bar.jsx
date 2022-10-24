@@ -9,21 +9,20 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
+import Swal from "sweetalert2";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import SimpleDialogDemo from "../Pages/Alerts/AlertMsg";
 import About from "../Pages/About";
 
 export default function PrimarySearchAppBar(props) {
   const navigate = useNavigate();
+  const [msg, setMsg] = React.useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [alert, setalert] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -48,12 +47,44 @@ export default function PrimarySearchAppBar(props) {
     console.log("dsji");
   };
 
-
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const showNotifications = () => {
-    setalert(true);
+    props.reducer({
+      type: "ClearNotificationsIconAlertNav",
+      ClearNotificationsIconAlertNav: 0,
+    });
+
+    if (localStorage.getItem("valueAlertArr")) {
+      setMsg(JSON.parse(localStorage.getItem("valueAlertArr")));
+      console.log(msg);
+      setTimeout(() => {
+        localStorage.removeItem("valueAlertArr");
+        setMsg([]);
+      }, 0);
+    }
+    let html =
+      msg.length !== 0
+        ? "<ol><br/>" +
+          msg
+            .map(function (task) {
+              return "<li>" + task + "</li>";
+            })
+            .join(" ") +
+          "</ol>"
+        : "<h1><h1/>";
+    let title =
+      msg.length !== 0 ? "<h1>Your Tasks ! <h1/>" : "<h1>No Tasks ! <h1/>";
+    Swal.fire({
+      title: title,
+      icon: "info",
+      html: html,
+      showCloseButton: true,
+      focusConfirm: false,
+      confirmButtonText: '<i class="fa fa-thumbs-up"></i> Close !',
+      confirmButtonAriaLabel: "Thumbs up, great!",
+    });
   };
 
   const menuId = "primary-search-account-menu";
@@ -127,8 +158,6 @@ export default function PrimarySearchAppBar(props) {
 
   return (
     <>
-      
-      {<SimpleDialogDemo setalert={setalert} alert={alert} />}
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
@@ -140,10 +169,12 @@ export default function PrimarySearchAppBar(props) {
               aria-label="open drawer"
               sx={{ mr: 2 }}
             >
-
-              <About/>
+              <About />
             </IconButton>
             <Typography
+              onClick={() => {
+                navigate("/HomePage");
+              }}
               variant="h6"
               noWrap
               component="div"

@@ -18,6 +18,8 @@ function FileUploadPage() {
     })
       .then((response) => response.json())
       .then((result) => {
+        alert("הצלחה !");
+        window.location.reload(false);
         console.log("Success:", result);
       })
       .catch((error) => {
@@ -26,8 +28,9 @@ function FileUploadPage() {
   };
 
   return (
-    <div>
+    <div className="UPlo">
       <input type="file" name="file" onChange={changeHandler} />
+      <hr/>
       {isFilePicked ? (
         <div>
           <p>Filename: {selectedFile.name}</p>
@@ -39,7 +42,10 @@ function FileUploadPage() {
           </p>
         </div>
       ) : (
-        <p>Select a file to show details</p>
+        <>
+        <br/>
+        <p>Select a file to uploads</p></>
+        
       )}
       <div>
         <button onClick={handleSubmission}>Submit</button>

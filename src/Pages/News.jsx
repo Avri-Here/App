@@ -3,9 +3,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
-import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import Alert from "./Alert";
 import { useState, useEffect } from "react";
 const axios = require("axios").default;
@@ -27,8 +25,8 @@ export default function News() {
 
   return arrNews ? (
     <>
-    <h1 style={{ textAlign: "center", direction:"rtl" }}>מבזקים כל רגע !</h1>
-    <br/>
+      <h1 style={{ textAlign: "center", direction: "rtl" }}>מבזקים כל רגע !</h1>
+      <br />
       <List
         style={{ direction: "rtl" }}
         sx={{ width: "100%", maxWidth: "90%", margin: "auto" }}
@@ -36,16 +34,12 @@ export default function News() {
         {arrNews.map((item, index) => {
           return (
             <>
-              <Box sx={{ width: "5%", margin: "auto" }}>
-                <LinearProgress  />
-              </Box>
-              
-              <div style={{ textAlign: "center" }}>
+              <div key={index}style={{ textAlign: "center" }}>
                 <ListItem key={index} alignItems="flex-start">
                   <ListItemText
                     className="txt"
                     style={{ textAlign: "center" }}
-                    primary={item.time.slice(10, 16)}
+                    primary={item.time.slice(11, 17)}
                     secondary={
                       <React.Fragment>
                         <Typography

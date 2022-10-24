@@ -33,7 +33,12 @@ function reducer(state, action) {
       return {
         ...state,
         NotificationsIconAlertNav:
-          action.NotificationsIconAlertNav + state.NotificationsIconAlertNav
+          action.NotificationsIconAlertNav + state.NotificationsIconAlertNav,
+      };
+    case "ClearNotificationsIconAlertNav":
+      return {
+        ...state,
+        NotificationsIconAlertNav: action.ClearNotificationsIconAlertNav,
       };
     default:
       return;
@@ -42,9 +47,8 @@ function reducer(state, action) {
 
 export default function Router() {
   const navigate = useNavigate();
-
+  const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
-    console.log(window.location.href);
     axios
       .post("http://localhost:3001/checkAuth", {
         token: localStorage.getItem("token"),
@@ -60,8 +64,8 @@ export default function Router() {
       .catch(() => {
         navigate("/Sign-In");
       });
-  }, []);
-  const [state, dispatch] = useReducer(reducer, initialState);
+  }, [state]);
+
   return (
     <>
       {state.showNav && (

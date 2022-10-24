@@ -15,11 +15,12 @@ export default function FormDialog(props) {
   useEffect(() => {
     socketIOClient.on("alertUser", (timeAlert, user, valueAlert) => {
       const valueAlertArr = [];
-      // if (localStorage.getItem("userConvr") === user) {
-      props.reducer({
-        type: "NotificationsIconAlertNav",
-        NotificationsIconAlertNav: 1
-      });
+      if (localStorage.getItem("UserName") === user) {
+        props.reducer({
+          type: "NotificationsIconAlertNav",
+          NotificationsIconAlertNav: 1,
+        });
+      }
       console.log(valueAlert);
       if (localStorage.getItem("valueAlertArr")) {
         let tempArr = JSON.parse(localStorage.getItem("valueAlertArr"));

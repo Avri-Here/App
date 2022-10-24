@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import img from "../Img/img_avatar.png";
+import Swal from "sweetalert2";
 
 const axios = require("axios").default;
 
@@ -22,98 +22,132 @@ export default (props) => {
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post("http://localhost:3001/users/signIn", inputs, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post("http://localhost:3001/users/signIn", inputs)
 
       .then((response) => {
         console.log(response.data.message);
         if (response.status === 200) {
           localStorage.setItem("token", response.data.token);
-          setStatus("Success ! You will immediately go to the requested page ");
-          let temp = setInterval(() => {
-            setStatus((last) => {
-              return last + ". ";
-            });
-          }, 700);
+          // setStatus("Success ! You will immediately go to the requested page ");
+          // let temp = setInterval(() => {
+          //   setStatus((last) => {
+          //     return last + ". ";
+          //   });
+          // }, 250);
           localStorage.setItem("UserName", response.data.message);
           console.log(response);
-          setTimeout(() => {
-            clearInterval(temp);
-            navigate("/HomePage");
-            props.reducer({ type: "showNav", showNav: true });
-          }, 3000);
+          // setTimeout(() => {
+          //   clearInterval(temp);
+          //   navigate("/HomePage");
+          //   props.reducer({ type: "showNav", showNav: true });
+          // }, 1500);
+          let timerInterval;
+          Swal.fire({
+            title: "Success !",
+            html: "I will close in <b></b> milliseconds.",
+            html: "You will immediately be transferred to the home page..",
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              const b = Swal.getHtmlContainer().querySelector("b");
+              timerInterval = setInterval(() => {
+                // b.textContent = Swal.getTimerLeft();
+              }, 850);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+              navigate("/HomePage");
+              props.reducer({ type: "showNav", showNav: true });
+            },
+          });
         }
       })
       .catch((error) => {
         console.log(error);
-        setStatus(error.response.data.message || "Erorr !");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response.data.message || "Erorr !"
+        });
+        
       });
   }
 
   return (
     <div>
-      <h1 style={{ textAlign: "center", fontFamily: "cursive" }}>Sign in !</h1>
+      <h1
+        style={{
+          textAlign: "center",
+          fontSize: "-webkit-xxx-large",
+          marginBottom: "2%",
+        }}
+      >
+        Sign in !
+      </h1>
       <form
-        style={{ textAlign: "center", fontFamily: "cursive" }}
+        style={{ textAlign: "center", fontFamily: "system-ui" }}
         onSubmit={handleSubmit}
         method="post"
       >
         <div className="imgcontainer">
           <img
-            style={{ width: "20vw", marginBottom: "1vw" }}
-            src={img}
+            style={{ width: "35vw", marginBottom: "1vw" }}
+            src={
+              "https://img.freepik.com/premium-vector/online-registration-sign-up-with-man-sitting-near-smartphone_268404-95.jpg?w=2000"
+            }
             alt="Avatar"
             className="avatar"
           />
         </div>
         <div className="container">
           <label htmlFor="uname">
-            <b>Username Email:</b>
-            <br />
+            <b style={{ marginRight: "2vw" }}>Enter Username : </b>
           </label>
+
           <input
-            style={{ marginBottom: "1vw", marginTop: "1vw" }}
+            style={{
+              marginBottom: "1vw",
+              marginTop: "1vw",
+              marginRight: "2vw",
+            }}
             type="text"
-            placeholder="Enter Username"
+            placeholder=" Username"
             required={true}
             name="userName"
             value={inputs.userName || ""}
             onChange={handleChange}
           />
-          <br />
+
           <label htmlFor="psw">
-            <b>Password</b>
+            <b style={{ marginRight: "2vw" }}>Your Password : </b>
           </label>
-          <br />
+
           <input
             style={{ marginBottom: "1vw", marginTop: "1vw" }}
             type="password"
-            placeholder="Enter Password"
+            placeholder=" Password"
             name="password"
             required={true}
             value={inputs.password || ""}
             onChange={handleChange}
           />
           <br />
-          <button type="submit">Login</button>
+          <br />
+          <button className="btnLog" type="submit">
+            Log in !
+          </button>
         </div>
         <h3 style={{ textAlign: "center" }}>{status}</h3>
+        <button
+          className="btnLog"
+          onClick={() => {
+            navigate("/Sign-Up");
+          }}
+        >
+          Do not have an account ?
+        </button>
       </form>
-      <button
-        style={{
-          fontFamily: "cursive",
-          marginLeft: "46%",
-          marginTop: "3vw",
-        }}
-        onClick={() => {
-          navigate("/Sign-Up");
-        }}
-      >
-        Do not have an account ?
-      </button>
     </div>
   );
 };
