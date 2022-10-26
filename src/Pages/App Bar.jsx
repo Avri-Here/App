@@ -18,8 +18,13 @@ export default function PrimarySearchAppBar(props) {
   const navigate = useNavigate();
   const [msg, setMsg] = React.useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [alert, setalert] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  React.useEffect(() => {
+    if (localStorage.getItem("valueAlertArr")) {
+      setMsg(JSON.parse(localStorage.getItem("valueAlertArr")));
+      console.log(msg);
+    }
+  }, []);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -51,6 +56,12 @@ export default function PrimarySearchAppBar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const showNotifications = () => {
+    console.log("showNotifications");
+    console.log(localStorage.getItem("valueAlertArr"));
+    let a1 = JSON.parse(localStorage.getItem("valueAlertArr"));
+    console.log(a1);
+    setMsg();
+    console.log(msg);
     props.reducer({
       type: "ClearNotificationsIconAlertNav",
       ClearNotificationsIconAlertNav: 0,
@@ -63,28 +74,35 @@ export default function PrimarySearchAppBar(props) {
         localStorage.removeItem("valueAlertArr");
         setMsg([]);
       }, 0);
+      let html =
+        "<ol><br/>" +
+        msg
+          .map(function (task) {
+            return "<li>" + task + "</li>";
+          })
+          .join(" ") +
+        "</ol>";
+
+      Swal.fire({
+        title: "<h1>Your Tasks ! <h1/>",
+        icon: "info",
+        html: html,
+        showCloseButton: true,
+        focusConfirm: false,
+        confirmButtonText: '<i class="fa fa-thumbs-up"></i> Close !',
+        confirmButtonAriaLabel: "Thumbs up, great!",
+      });
+    } else {
+      let title = "<h1>No Tasks ! <h1/>";
+      Swal.fire({
+        title: title,
+        icon: "info",
+        showCloseButton: true,
+        focusConfirm: false,
+        confirmButtonText: '<i class="fa fa-thumbs-up"></i> Close !',
+        confirmButtonAriaLabel: "Thumbs up, great!",
+      });
     }
-    let html =
-      msg.length !== 0
-        ? "<ol><br/>" +
-          msg
-            .map(function (task) {
-              return "<li>" + task + "</li>";
-            })
-            .join(" ") +
-          "</ol>"
-        : "<h1><h1/>";
-    let title =
-      msg.length !== 0 ? "<h1>Your Tasks ! <h1/>" : "<h1>No Tasks ! <h1/>";
-    Swal.fire({
-      title: title,
-      icon: "info",
-      html: html,
-      showCloseButton: true,
-      focusConfirm: false,
-      confirmButtonText: '<i class="fa fa-thumbs-up"></i> Close !',
-      confirmButtonAriaLabel: "Thumbs up, great!",
-    });
   };
 
   const menuId = "primary-search-account-menu";

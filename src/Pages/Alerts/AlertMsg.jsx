@@ -1,7 +1,6 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -17,8 +16,8 @@ function SimpleDialog(props) {
 
   const handleClose = () => {
     onClose(selectedValue);
-    localStorage.removeItem("valueAlertArr");
-    setMsg([]);
+    // localStorage.removeItem("valueAlertArr");
+    // setMsg([]);
   };
 
   useEffect(() => {
