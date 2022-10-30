@@ -28,13 +28,12 @@ export default function AlertDialogSlide(props) {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle style={{ direction: "rtl" }}>
-          {"  תוכן זה נטען דרך אתר ממקור אחר, להמשיך ?"}
+          {"  תוכן זה נטען דרך אתר ממקור אחר, אנא קרא בעיון !"}
         </DialogTitle>
         <DialogContent style={{ direction: "rtl" }}>
           <DialogContentText id="alert-dialog-slide-description">
-            מבזקי חדשות אלו נלקחו מאתר אינטרנט אחר ללא היתר מפורש ושלא כדין,
-            הצפייה בתוכן עלולה להוות עבירה פלילית או עילה לתביעה, בלחיצה על המשך
-            אתה מאשר שהודעה זו נקראה ואתה מבין את ההשלכות .
+            מבזקי חדשות אלו נלקחו מאתר אינטרנט אחר עם היתר מפורש מבעל האתר,
+            הצפייה בתוכן זה ניתנת גם דרך אתר כל רגע, בלחיצה על המשך תועבר לנתיב המבוקש ..
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -42,7 +41,7 @@ export default function AlertDialogSlide(props) {
             onClick={props.loudNews}
             style={{ direction: "rtl", fontSize: "1rem" }}
           >
-            המשך בכל אופן !
+            המשך   !
           </Button>
         </DialogActions>
         <DialogActions>
@@ -50,17 +49,10 @@ export default function AlertDialogSlide(props) {
             onClick={Disagree}
             style={{ direction: "rtl", fontSize: "1rem" }}
           >
-           חזרה לחוף מבטחים ..
+            חזור לדף הבית ..
           </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
 }
-
-
-
-
-
-
-

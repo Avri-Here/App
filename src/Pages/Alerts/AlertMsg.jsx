@@ -20,11 +20,6 @@ function SimpleDialog(props) {
     // setMsg([]);
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("valueAlertArr")) {
-      setMsg(JSON.parse(localStorage.getItem("valueAlertArr")));
-    }
-  }, []);
 
   return (
     <Dialog onClose={handleClose} open={open}>

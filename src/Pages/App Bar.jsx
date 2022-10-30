@@ -56,31 +56,18 @@ export default function PrimarySearchAppBar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const showNotifications = () => {
-    console.log("showNotifications");
-    console.log(localStorage.getItem("valueAlertArr"));
-    let a1 = JSON.parse(localStorage.getItem("valueAlertArr"));
-    console.log(a1);
-    setMsg();
-    console.log(msg);
+    console.log(props.stateGlobal.AddNotificationsIconAlertNav);
     props.reducer({
       type: "ClearNotificationsIconAlertNav",
       ClearNotificationsIconAlertNav: 0,
     });
 
-    if (localStorage.getItem("valueAlertArr")) {
-      setMsg(JSON.parse(localStorage.getItem("valueAlertArr")));
-      console.log(msg);
-      setTimeout(() => {
-        localStorage.removeItem("valueAlertArr");
-        setMsg([]);
-      }, 0);
+    if (props.stateGlobal.AddNotificationsIconAlertNav.length !== 0) {
       let html =
         "<ol><br/>" +
-        msg
-          .map(function (task) {
-            return "<li>" + task + "</li>";
-          })
-          .join(" ") +
+        props.stateGlobal.AddNotificationsIconAlertNav.map(function (task) {
+          return "<li>" + task + "</li>";
+        }).join(" ") +
         "</ol>";
 
       Swal.fire({
@@ -92,6 +79,7 @@ export default function PrimarySearchAppBar(props) {
         confirmButtonText: '<i class="fa fa-thumbs-up"></i> Close !',
         confirmButtonAriaLabel: "Thumbs up, great!",
       });
+
     } else {
       let title = "<h1>No Tasks ! <h1/>";
       Swal.fire({
@@ -103,6 +91,7 @@ export default function PrimarySearchAppBar(props) {
         confirmButtonAriaLabel: "Thumbs up, great!",
       });
     }
+
   };
 
   const menuId = "primary-search-account-menu";

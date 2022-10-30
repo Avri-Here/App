@@ -21,17 +21,10 @@ export default function FormDialog(props) {
           NotificationsIconAlertNav: 1,
         });
       }
-      console.log(valueAlert);
-      if (localStorage.getItem("valueAlertArr")) {
-        let tempArr = JSON.parse(localStorage.getItem("valueAlertArr"));
-        tempArr.push(valueAlert);
-        localStorage.setItem("valueAlertArr", JSON.stringify(tempArr));
-      } else {
-        valueAlertArr.push(valueAlert);
-        localStorage.setItem("valueAlertArr", JSON.stringify(valueAlertArr));
-      }
-
-      // }
+      props.reducer({
+        type: "AddNotificationsIconAlertNav",
+        AddNotificationsIconAlertNav: valueAlert,
+      });
     });
   }, []);
   const [open, setOpen] = React.useState(false);

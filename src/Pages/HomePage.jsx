@@ -128,61 +128,7 @@ export default () => {
               </div>
             </div>
           </div>
-          <div className="col">
-            <div className="card" style={{ width: "18rem" }}>
-              <img
-                style={{
-                  width: "18rem",
-                  height: "12rem",
-                  backgroundSize: "cover",
-                  float: "left",
-                }}
-                src={imgShop}
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="card-body">
-                <h5 dir="rtl" className="card-title">
-                  התחל לקנות !
-                </h5>
-                <p className="card-text" dir="rtl">
-                אתרי קניות .. 
-                </p>
-                <a href="Sale" className="btn btn-primary">
-                  Mone On !
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col">
-            <div className="card" style={{ width: "18rem" }}>
-              <img
-                style={{
-                  width: "18rem",
-                  height: "12rem",
-                  backgroundSize: "cover",
-                  float: "left",
-                }}
-                src={FileUploadImg}
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="card-body">
-                <h5 dir="rtl" className="card-title">
-                  שתף את הקבצים שלך !
-                </h5>
-                <p className="card-text" dir="rtl">
-                  רוצה לשתף את התמונה שצילמת לפני שלושה שבועות בטלפון שלך, או את
-                  המתכון ששמרת במחשב שלך? באפשרותך לשתף תמונות, קבצים ואתרי
-                  אינטרנט עם חבריך Skype באמצעות Windows, Mac, Linux, טלפון או
-                  טאבלט של Android iPhone או iPad.
-                </p>
-                <a href="FileUploadPage" className="btn btn-primary">
-                  Mone On !
-                </a>
-              </div>
-            </div>
-          </div>
+          
         </div>
         <br />
       </div>

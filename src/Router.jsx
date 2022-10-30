@@ -6,7 +6,6 @@ import PrimarySearchAppBar from "./Pages/App Bar";
 import SignUp from "./Pages/Sign up";
 import SignIn from "./Pages/Sign In";
 import HomePage from "./Pages/HomePage";
-import Sale from "./Pages/Sale";
 import Account_Settings from "./Pages/Account_Settings";
 import Chat from "./Pages/Chat";
 import FileUploadPage from "./Pages/FileUploadPage";
@@ -21,6 +20,7 @@ const initialState = {
   userName: "",
   showNav: true,
   NotificationsIconAlertNav: 0,
+  AddNotificationsIconAlertNav: [],
 };
 
 function reducer(state, action) {
@@ -39,6 +39,15 @@ function reducer(state, action) {
       return {
         ...state,
         NotificationsIconAlertNav: action.ClearNotificationsIconAlertNav,
+        AddNotificationsIconAlertNav: [],
+      };
+    case "AddNotificationsIconAlertNav":
+      return {
+        ...state,
+        AddNotificationsIconAlertNav: [
+          ...state.AddNotificationsIconAlertNav,
+          action.AddNotificationsIconAlertNav,
+        ],
       };
     default:
       return;
@@ -82,7 +91,6 @@ export default function Router() {
           element={<SignIn reducer={dispatch} state={state} />}
         />
         <Route path="HomePage" element={<HomePage name={state.userName} />} />
-        <Route path="Sale" element={<Sale />} />
         <Route
           path="TodoList"
           element={<TodoList reducer={dispatch} state={state} />}

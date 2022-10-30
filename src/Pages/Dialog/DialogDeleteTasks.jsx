@@ -44,7 +44,7 @@ export default function DialogDeleteTasks(props) {
           <DialogTitle>סימון כל המטלות כהושלמו .. </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              פעולה זו תגדיר את כל המטלות כהושלמו, לאחר ביצוע הפעולה לא ניתו
+              פעולה זו תגדיר את כל המטלות כהושלמו, לאחר ביצוע הפעולה לא ניתן
               יהיה לחזור למצב הקודם ..
             </DialogContentText>
             {/* <TextField
