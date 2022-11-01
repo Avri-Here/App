@@ -1,14 +1,13 @@
 import React from "react";
 import ToDoList from "../Img/ToDoList.jpg";
 import imgDelete from "../Img/delete.jpg";
-import imgDone from "../Img/Done.jpg";
 import Dialog from "../Pages/Dialog";
+import swal from "sweetalert";
 import AlertTask from "../Pages/Dialog/AlertTask";
 import DialogDeleteTasks from "../Pages/Dialog/DialogDeleteTasks";
 import styled from "styled-components";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
+import alertifyjs from "alertifyjs";
 const axios = require("axios").default;
 const Box = styled.div`
   body {
@@ -116,44 +115,50 @@ const Box = styled.div`
 export default (props) => {
   const [taskArr, setTaskArr] = useState([]);
   const [showAlert, setShowAlert] = useState([false, false, false]);
-  const [txt, setText] = useState("");
   const taskName = useRef(null);
   const description = useRef(null);
   const priority = useRef(null);
-  const timeStart = useRef(null);
   const timeEnd = useRef(null);
-  let alarmMe = false;
   function deleteAllTask() {
-    const temp = [showAlert];
+    const temp = [...showAlert];
     temp[1] = true;
     setShowAlert(temp);
   }
-  function loudTask() {}
-  function markAllTaskAsDone() {
-    const temp = [showAlert];
-    temp[0] = true;
-    setShowAlert(temp);
+  async function loudTask() {
+    console.log(localStorage.UserName);
+    try {
+      const resp = await axios.post("http://localhost:3001/Task/getAllTask", {
+        userName: localStorage.getItem("UserName"),
+      });
+      alert(JSON.stringify(resp.data));
+      console.log(resp);
+    } catch (err) {
+      console.error(err);
+    }
   }
-  async function addTask() {
+  async function addTask(e) {
+    e.preventDefault();
     try {
       const resp = await axios.post("http://localhost:3001/Task/newTask", {
+        userName: localStorage.getItem("UserName"),
         taskName: taskName.current.value,
         description: description.current.value,
         priority: priority.current.value,
-        timeStart: timeStart.current.value,
         timeEnd: timeEnd.current.value,
-        alarmMe: alarmMe,
-        token: localStorage.getItem("token"),
       });
-      console.log(resp);
+      if (resp.status === 200) {
+        swal("! משימה נוספה ", " ! נשמרה במאגר המשימות שלך  ", "success");
+      }
+      console.log(resp.status);
     } catch (err) {
+      swal(" ! error ! ", JSON.stringify(err), "error");
       console.error(err);
     }
   }
   return (
     <Box>
       <br />
-      <div id="myDIV" className="container">
+      <form id="myDIV" className="container" onSubmit={addTask}>
         <h2
           style={{
             margin: "6px",
@@ -171,9 +176,7 @@ export default (props) => {
               type="text"
               id="myInput"
               placeholder="תיאור .."
-              onChange={(e) => {
-                setText(e.target.value);
-              }}
+              required
             />
           </div>
           <div className="col">
@@ -182,9 +185,7 @@ export default (props) => {
               type="text"
               id="myInput"
               placeholder="נושא .."
-              onChange={(e) => {
-                setText(e.target.value);
-              }}
+              required
             />
           </div>
         </div>
@@ -196,6 +197,7 @@ export default (props) => {
               list="option"
               id="myInput"
               placeholder="עדיפות .."
+              required
             />
             <datalist id="option">
               <option direction="rtl">גבוהה</option>
@@ -211,11 +213,9 @@ export default (props) => {
                 e.target.value = new Date().toISOString().slice(0, 10);
               }}
               id="myInput"
-              ref={timeStart}
-              placeholder="תאריך .. "
-              onChange={(e) => {
-                setText(e.target.value);
-              }}
+              ref={timeEnd}
+              placeholder=" תאריך סיום   .. "
+              required
             />
           </div>
         </div>
@@ -231,19 +231,18 @@ export default (props) => {
           <br />
         </div>
 
-        <button
-          onClick={addTask}
-          type="button"
-          className="btn btn-secondary btn-lg"
-        >
+        <button type="submit" className="btn btn-secondary btn-lg">
           Add new Task
         </button>
-      </div>
+      </form>
       <hr />
 
       <br />
       <div className="container">
-        <div className="row">
+        <div
+          className="row"
+          style={{ color: "blue", direction: "rtl", marginLeft: "-89rem" }}
+        >
           <div className="col-3">
             <img
               className="img-fluid"
@@ -261,31 +260,10 @@ export default (props) => {
               style={{ color: "blue", direction: "rtl" }}
               className="centered"
             >
-              מחק את כל המטלות עד עתה ..
+              מחק את כל המטלות ..
             </div>
           </div>
 
-          <div className="col-6">
-            <img
-              className="img-fluid"
-              alt="Responsive image"
-              style={{
-                width: "7vw",
-                height: "5vw",
-                border: "5px solid mediumslateblue",
-                borderRadius: "5vw",
-              }}
-              onClick={markAllTaskAsDone}
-              src={imgDone}
-            ></img>
-            <div
-              style={{ color: "blue", direction: "rtl" }}
-              className="centered"
-            >
-              {" "}
-              סמן את כל המטלות כהושלמו ..
-            </div>
-          </div>
           <div className="col-3">
             <img
               className="img-fluid"
@@ -296,8 +274,8 @@ export default (props) => {
                 border: "5px solid mediumslateblue",
                 borderRadius: "5vw",
               }}
-              onClick={loudTask}
               src={ToDoList}
+              onClick={loudTask}
             ></img>
             <div
               style={{ color: "blue", direction: "rtl" }}

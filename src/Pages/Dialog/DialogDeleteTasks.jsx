@@ -15,16 +15,15 @@ export default function DialogDeleteTasks(props) {
   const [progress, setProgress] = useState(true);
   async function deleteAllTask() {
     setProgress(false);
-    setTimeout(() => {
-      const temp = [props.showAlert];
-      temp[1] = true;
-      props.setShowAlert(temp);
-      swal("Success !", "! המטלות נמחקו בהצלחה ", "success");
-    }, 2000);
     try {
       const resp = await axios.post("http://localhost:3001/Task/deleteAll", {
-        token: localStorage.getItem("token"),
+        userName: localStorage.getItem("UserName"),
       });
+      const temp = [...props.showAlert];
+      console.log(temp);
+      temp[1] = false;
+      props.setShowAlert(temp);
+      swal("Success !", "! המטלות נמחקו בהצלחה ", "success");
       console.log(resp);
     } catch (err) {
       console.error(err);
@@ -41,10 +40,10 @@ export default function DialogDeleteTasks(props) {
     <div>
       {progress ? (
         <Dialog dir="rtl" open={true} onClose={handleClose}>
-          <DialogTitle>סימון כל המטלות כהושלמו .. </DialogTitle>
+          <DialogTitle>מחיקת כל המטלות  .. </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              פעולה זו תגדיר את כל המטלות כהושלמו, לאחר ביצוע הפעולה לא ניתן
+              פעולה זו תמחק את כל המטלות עד עתה, לאחר ביצוע המחיקה לא ניתן
               יהיה לחזור למצב הקודם ..
             </DialogContentText>
             {/* <TextField
@@ -64,7 +63,7 @@ export default function DialogDeleteTasks(props) {
           </DialogActions>
         </Dialog>
       ) : (
-        <CircularProgress disableShrink />
+        <CircularProgress style={{position:"absolute"}} disableShrink />
       )}
     </div>
   );

@@ -10,6 +10,7 @@
     "@material-ui/lab": "^4.0.0-alpha.61",
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.6",
+    "alertifyjs": "^1.13.1",
     "antd": "^4.23.4",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
