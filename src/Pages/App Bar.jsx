@@ -42,6 +42,7 @@ export default function PrimarySearchAppBar(props) {
   };
   const LogOut = () => {
     props.reducer({ type: "showNav", showNav: false });
+    localStorage.clear();
     navigate("/Sign-In");
   };
   const Account_Settings = () => {
@@ -113,9 +114,9 @@ export default function PrimarySearchAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={Account_Settings}>Change account settings</MenuItem>
-      <MenuItem onClick={LogOut}>Log out</MenuItem>
-      <MenuItem onClick={SendMeEmail}>Send Me Email</MenuItem>
+      <MenuItem onClick={Account_Settings}>Change Account Settings</MenuItem>
+      <MenuItem onClick={SendMeEmail}>Send Me An Email</MenuItem>
+      <MenuItem onClick={LogOut}>Log Out</MenuItem>
     </Menu>
   );
 

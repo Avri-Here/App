@@ -11,7 +11,7 @@ import Chat from "./Pages/Chat";
 import FileUploadPage from "./Pages/FileUploadPage";
 import News from "./Pages/News";
 import TodoList from "./Pages/TodoList";
-import {SendMeEmail} from "./Pages/SendMeEmail";
+import { SendMeEmail } from "./Pages/SendMeEmail";
 import { useNavigate } from "react-router-dom";
 
 // import NoPage from "./pages/NoPage";
@@ -68,6 +68,7 @@ export default function Router() {
           window.location.href === "http://localhost:3000/Sign-In" ||
           window.location.href === "http://localhost:3000/"
         ) {
+          dispatch({ type: "showNav", showNav: true });
           navigate("/HomePage");
         }
       })
@@ -103,10 +104,7 @@ export default function Router() {
           path="Account_Settings"
           element={<Account_Settings name={state.userName} />}
         />
-        <Route
-          path="SendMeEmail"
-          element={<SendMeEmail/>}
-        />
+        <Route path="SendMeEmail" element={<SendMeEmail />} />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </>
