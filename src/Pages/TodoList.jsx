@@ -7,7 +7,6 @@ import AlertTask from "../Pages/Dialog/AlertTask";
 import DialogDeleteTasks from "../Pages/Dialog/DialogDeleteTasks";
 import styled from "styled-components";
 import { useState, useRef } from "react";
-import alertifyjs from "alertifyjs";
 const axios = require("axios").default;
 const Box = styled.div`
   body {

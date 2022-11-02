@@ -51,6 +51,10 @@ export default function PrimarySearchAppBar(props) {
   const about = () => {
     console.log("dsji");
   };
+  const SendMeEmail = () => {
+    handleMenuClose();
+    navigate("/SendMeEmail");
+  };
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -79,7 +83,6 @@ export default function PrimarySearchAppBar(props) {
         confirmButtonText: '<i class="fa fa-thumbs-up"></i> Close !',
         confirmButtonAriaLabel: "Thumbs up, great!",
       });
-
     } else {
       let title = "<h1>No Tasks ! <h1/>";
       Swal.fire({
@@ -91,7 +94,6 @@ export default function PrimarySearchAppBar(props) {
         confirmButtonAriaLabel: "Thumbs up, great!",
       });
     }
-
   };
 
   const menuId = "primary-search-account-menu";
@@ -113,6 +115,7 @@ export default function PrimarySearchAppBar(props) {
     >
       <MenuItem onClick={Account_Settings}>Change account settings</MenuItem>
       <MenuItem onClick={LogOut}>Log out</MenuItem>
+      <MenuItem onClick={SendMeEmail}>Send Me Email</MenuItem>
     </Menu>
   );
 

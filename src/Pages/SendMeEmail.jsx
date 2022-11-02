@@ -1,20 +1,41 @@
+import axios from "axios";
 import React from "react";
 
 export const SendMeEmail = () => {
-
+  const nameRef = React.useRef(null);
+  const LastRef = React.useRef(null);
+  const email = React.useRef(null);
+  const Phone = React.useRef(null);
+  const message = React.useRef(null);
+  function SendMeEmail(event) {
+    event.preventDefault();
+    axios
+      .post("http://localhost:3001/SendMeEmail", {
+        nameRef: nameRef.current.value,
+        LastRef: LastRef.current.value,
+        email: email.current.value,
+        Phone: Phone.current.value,
+        message: message.current.value,
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  }
   return (
     <form
-      action="/action_page.php"
+      onSubmit={SendMeEmail}
       className="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin"
     >
       <h2 className="w3-center">צור קשר</h2>
-      <br/>
+      <br />
       <div className="w3-row w3-section">
         <div className="w3-col" style={{ width: "50px" }}>
           <i className="w3-xxlarge fa fa-user" />
         </div>
         <div className="w3-rest">
           <input
+            required
+            ref={nameRef}
             className="w3-input w3-border"
             name="first"
             type="text"
@@ -28,8 +49,10 @@ export const SendMeEmail = () => {
         </div>
         <div className="w3-rest">
           <input
+            required
             className="w3-input w3-border"
             name="last"
+            ref={LastRef}
             type="text"
             placeholder="Last Name"
           />
@@ -41,8 +64,10 @@ export const SendMeEmail = () => {
         </div>
         <div className="w3-rest">
           <input
+            required
             className="w3-input w3-border"
             name="email"
+            ref={email}
             type="text"
             placeholder="Email"
           />
@@ -54,6 +79,8 @@ export const SendMeEmail = () => {
         </div>
         <div className="w3-rest">
           <input
+            required
+            ref={Phone}
             className="w3-input w3-border"
             name="phone"
             type="text"
@@ -67,6 +94,8 @@ export const SendMeEmail = () => {
         </div>
         <div className="w3-rest">
           <input
+            required
+            ref={message}
             className="w3-input w3-border"
             name="message"
             type="text"
@@ -75,10 +104,9 @@ export const SendMeEmail = () => {
         </div>
       </div>
       <p className="w3-center">
-        <button className="w3-button w3-section w3-blue w3-ripple">
-          {" "}
-          Send{" "}
-        </button>
+        <label className="w3-button w3-section w3-blue w3-ripple">
+          <input type="submit" />
+        </label>
       </p>
     </form>
   );
