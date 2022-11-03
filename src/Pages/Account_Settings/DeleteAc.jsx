@@ -20,7 +20,7 @@ export default function DeleteAc() {
   function deleteUser() {
     const obb = { token: localStorage.getItem("token") };
     axios
-      .post("http://https://sure-cook-production.up.railway.app/users/delete", obb, {
+      .post("https://sure-cook-production.up.railway.app/users/delete", obb, {
         headers: {
           "Content-Type": "application/json",
         },

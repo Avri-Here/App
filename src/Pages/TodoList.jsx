@@ -126,7 +126,7 @@ export default (props) => {
   async function loudTask() {
     console.log(localStorage.UserName);
     try {
-      const resp = await axios.post("http://https://sure-cook-production.up.railway.app/Task/getAllTask", {
+      const resp = await axios.post("https://sure-cook-production.up.railway.app/Task/getAllTask", {
         userName: localStorage.getItem("UserName"),
       });
       alert(JSON.stringify(resp.data));
@@ -138,7 +138,7 @@ export default (props) => {
   async function addTask(e) {
     e.preventDefault();
     try {
-      const resp = await axios.post("http://https://sure-cook-production.up.railway.app/Task/newTask", {
+      const resp = await axios.post("https://sure-cook-production.up.railway.app/Task/newTask", {
         userName: localStorage.getItem("UserName"),
         taskName: taskName.current.value,
         description: description.current.value,

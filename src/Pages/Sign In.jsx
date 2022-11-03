@@ -28,7 +28,6 @@ export default (props) => {
         console.log(response.data.message);
         if (response.status === 200) {
           localStorage.setItem("token", response.data.token);
-  
           localStorage.setItem("UserName", response.data.message);
           console.log(response);
           let timerInterval;

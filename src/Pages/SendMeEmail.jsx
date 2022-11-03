@@ -10,7 +10,7 @@ export const SendMeEmail = () => {
   function SendMeEmail(event) {
     event.preventDefault();
     axios
-      .post("http://https://sure-cook-production.up.railway.app/SendMeEmail", {
+      .post("https://sure-cook-production.up.railway.app/SendMeEmail", {
         nameRef: nameRef.current.value,
         LastRef: LastRef.current.value,
         email: email.current.value,
@@ -19,7 +19,9 @@ export const SendMeEmail = () => {
       })
       .then((res) => {
         swal("Success !", "!   ההודעה נשלחה למנהל המערכת ", "success");
-        window.location.reload(false);
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 3500);
         console.log(res);
       });
   }

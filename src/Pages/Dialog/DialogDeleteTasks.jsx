@@ -16,7 +16,7 @@ export default function DialogDeleteTasks(props) {
   async function deleteAllTask() {
     setProgress(false);
     try {
-      const resp = await axios.post("http://https://sure-cook-production.up.railway.app/Task/deleteAll", {
+      const resp = await axios.post("https://sure-cook-production.up.railway.app/Task/deleteAll", {
         userName: localStorage.getItem("UserName"),
       });
       const temp = [...props.showAlert];
