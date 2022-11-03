@@ -28,19 +28,9 @@ export default (props) => {
         console.log(response.data.message);
         if (response.status === 200) {
           localStorage.setItem("token", response.data.token);
-          // setStatus("Success ! You will immediately go to the requested page ");
-          // let temp = setInterval(() => {
-          //   setStatus((last) => {
-          //     return last + ". ";
-          //   });
-          // }, 250);
+  
           localStorage.setItem("UserName", response.data.message);
           console.log(response);
-          // setTimeout(() => {
-          //   clearInterval(temp);
-          //   navigate("/HomePage");
-          //   props.reducer({ type: "showNav", showNav: true });
-          // }, 1500);
           let timerInterval;
           Swal.fire({
             title: "Success !",
@@ -52,7 +42,6 @@ export default (props) => {
               Swal.showLoading();
               const b = Swal.getHtmlContainer().querySelector("b");
               timerInterval = setInterval(() => {
-                // b.textContent = Swal.getTimerLeft();
               }, 850);
             },
             willClose: () => {

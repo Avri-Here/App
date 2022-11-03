@@ -33,7 +33,12 @@ export default function AlertDialogSlide(props) {
         <DialogContent style={{ direction: "rtl" }}>
           <DialogContentText id="alert-dialog-slide-description">
             מבזקי חדשות אלו נלקחו מאתר אינטרנט אחר עם היתר מפורש מבעל האתר,
-            הצפייה בתוכן זה ניתנת גם דרך אתר כל רגע, בלחיצה על המשך תועבר לנתיב המבוקש ..
+            הצפייה בתוכן זה ניתנת גם דרך אתר{" "}
+            <a href="https://www.kore.co.il/flashNews" target="_blank">
+              {" "}
+              כל רגע{" "}
+            </a>
+            , בלחיצה על המשך תועבר לנתיב המבוקש ..
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -41,7 +46,7 @@ export default function AlertDialogSlide(props) {
             onClick={props.loudNews}
             style={{ direction: "rtl", fontSize: "1rem" }}
           >
-            המשך   !
+            המשך !
           </Button>
         </DialogActions>
         <DialogActions>
