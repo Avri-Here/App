@@ -1,5 +1,5 @@
-// import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import React from 'react';
 import { useState, useEffect, useRef } from "react";
 import ChatTemple from "./ChatTemple";
 import styled from "styled-components";

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-
+import React from 'react';
 export default () => {
   useEffect(() => {
       window.location.replace("https://sure-cook-production.up.railway.app/SignUp.html");

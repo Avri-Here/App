@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from "react-router-dom";
 import imgChat from "../Img/Chat.jpg";
 import imgShop from "../Img/Shop.jpg";
@@ -128,7 +129,6 @@ export default () => {
               </div>
             </div>
           </div>
-          
         </div>
         <br />
       </div>

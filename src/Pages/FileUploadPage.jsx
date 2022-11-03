@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import React from 'react';
 function FileUploadPage() {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);

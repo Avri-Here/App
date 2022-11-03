@@ -2,6 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useReducer, useState, useEffect } from "react";
 import PrimarySearchAppBar from "./Pages/App Bar";
+import React from 'react';
 
 import SignUp from "./Pages/Sign up";
 import SignIn from "./Pages/Sign In";

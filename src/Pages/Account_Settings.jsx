@@ -3,6 +3,7 @@ import DeleteAc from "./Account_Settings/DeleteAc";
 import ChangeMyPassword from "./Account_Settings/ChangeMyPassword";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import React from 'react';
 const axios = require("axios").default;
 export default (props) => {
   return (
