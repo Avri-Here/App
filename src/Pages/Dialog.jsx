@@ -23,7 +23,7 @@ export default function FormDialog(props) {
         swal("Success !", "! המטלות סומנו כבוצעו ", "success");
     }, 2000);
     try {
-      const resp = await axios.post("http://localhost:3001/Task/markAll", {
+      const resp = await axios.post("http://https://sure-cook-production.up.railway.app/Task/markAll", {
         token: localStorage.getItem("token"),
       });
       console.log(resp);

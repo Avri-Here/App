@@ -10,7 +10,7 @@ export const SendMeEmail = () => {
   function SendMeEmail(event) {
     event.preventDefault();
     axios
-      .post("http://localhost:3001/SendMeEmail", {
+      .post("http://https://sure-cook-production.up.railway.app/SendMeEmail", {
         nameRef: nameRef.current.value,
         LastRef: LastRef.current.value,
         email: email.current.value,

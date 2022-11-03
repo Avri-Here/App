@@ -28,7 +28,7 @@ export default function ChangeMyPassword() {
     }
     const send = { token: localStorage.getItem("token"), newPass: pass1 };
     axios
-      .post("http://localhost:3001/users/Update", send, {
+      .post("http://https://sure-cook-production.up.railway.app/users/Update", send, {
         headers: {
           "Content-Type": "application/json",
         },

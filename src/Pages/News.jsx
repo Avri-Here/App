@@ -17,7 +17,7 @@ export default function News() {
     }
   }
   useEffect(() => {
-    axios("http://localhost:3001/news").then((res) => {
+    axios("http://https://sure-cook-production.up.railway.app/news").then((res) => {
       console.log(res);
       sessionStorage.setItem("newsArr", JSON.stringify(res.data.News));
     });

@@ -22,7 +22,7 @@ export default (props) => {
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post("http://localhost:3001/users/signIn", inputs)
+      .post("https://sure-cook-production.up.railway.app/users/signIn", inputs)
 
       .then((response) => {
         console.log(response.data.message);
@@ -68,9 +68,8 @@ export default (props) => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: error.response.data.message || "Erorr !"
+          text: error.response.data.message || "Erorr !",
         });
-        
       });
   }
 

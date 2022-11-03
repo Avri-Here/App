@@ -60,7 +60,7 @@ export default function Router() {
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
     axios
-      .post("http://localhost:3001/checkAuth", {
+      .post("http://https://sure-cook-production.up.railway.app/checkAuth", {
         token: localStorage.getItem("token"),
       })
       .then(() => {
