@@ -13,29 +13,31 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 const axios = require("axios").default;
 
-export default function DeleteAc() {
+export default function DeleteAc(props) {
   const [status, setStatus] = useState(null);
   const ref = useRef(null);
   const navigate = useNavigate();
   function deleteUser() {
     const obb = { token: localStorage.getItem("token") };
     axios
-      .post("http://localhost:3001/users/delete", obb, {
+      .post("https://sure-cook-production.up.railway.app/users/delete", obb, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         console.log(response);
-        ref.current.style.display = "none"
+        ref.current.style.display = "none";
         setStatus(true);
         setTimeout(() => {
           navigate("/Sign-In");
-        }, 3000);
+          props.reducer({ type: "showNav", showNav: false });
+          localStorage.clear();
+        }, 1000);
       })
       .catch((error) => {
         setStatus(false);
-        ref.current.style.display = "none"
+        ref.current.style.display = "none";
         setTimeout(() => {
           window.location.reload(false);
         }, 2500);
@@ -85,9 +87,7 @@ export default function DeleteAc() {
         </CardActions>
       </Card>
       {status === true ? (
-        <Stack
-          spacing={2}
-        >
+        <Stack spacing={2}>
           <Alert severity="success">
             <AlertTitle>Success !</AlertTitle>
             Your account has been successfully deleted !{" "}
@@ -95,9 +95,7 @@ export default function DeleteAc() {
           </Alert>
         </Stack>
       ) : status === false ? (
-        <Stack
-          spacing={2}
-        >
+        <Stack spacing={2}>
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
             This is an error alert — <strong>check it out!</strong>

@@ -220,7 +220,7 @@ export default function () {
   useEffect(() => {
     axios
       .post(
-        "http://localhost:3001/users/",
+        "https://sure-cook-production.up.railway.app/users",
         { token: localStorage.getItem("token") },
         {
           headers: {
@@ -247,7 +247,7 @@ export default function () {
     localStorage.setItem("userConvr", comper);
     axios
       .post(
-        "http://localhost:3001/chat/startChat",
+        "https://sure-cook-production.up.railway.app/chat/startChat",
         {
           token: localStorage.getItem("token"),
           idWith: paramsUser,

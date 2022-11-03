@@ -9,8 +9,9 @@ export const SendMeEmail = () => {
   const message = React.useRef(null);
   function SendMeEmail(event) {
     event.preventDefault();
+    
     axios
-      .post("http://localhost:3001/SendMeEmail", {
+      .post("https://sure-cook-production.up.railway.app/SendMeEmail", {
         nameRef: nameRef.current.value,
         LastRef: LastRef.current.value,
         email: email.current.value,

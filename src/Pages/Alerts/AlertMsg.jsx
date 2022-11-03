@@ -16,8 +16,6 @@ function SimpleDialog(props) {
 
   const handleClose = () => {
     onClose(selectedValue);
-    // localStorage.removeItem("valueAlertArr");
-    // setMsg([]);
   };
 
 

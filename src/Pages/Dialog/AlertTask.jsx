@@ -8,13 +8,12 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
-const ENDPOINT = "http://localhost:3001";
+const ENDPOINT = "https://sure-cook-production.up.railway.app";
 const socketIOClient = io(ENDPOINT);
 
 export default function FormDialog(props) {
   useEffect(() => {
     socketIOClient.on("alertUser", (timeAlert, user, valueAlert) => {
-      const valueAlertArr = [];
       if (localStorage.getItem("UserName") === user) {
         props.reducer({
           type: "NotificationsIconAlertNav",

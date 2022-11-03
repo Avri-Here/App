@@ -16,7 +16,7 @@ export default function DialogDeleteTasks(props) {
   async function deleteAllTask() {
     setProgress(false);
     try {
-      const resp = await axios.post("http://localhost:3001/Task/deleteAll", {
+      const resp = await axios.post("https://sure-cook-production.up.railway.app/Task/deleteAll", {
         userName: localStorage.getItem("UserName"),
       });
       const temp = [...props.showAlert];
@@ -46,15 +46,6 @@ export default function DialogDeleteTasks(props) {
               פעולה זו תמחק את כל המטלות עד עתה, לאחר ביצוע המחיקה לא ניתן
               יהיה לחזור למצב הקודם ..
             </DialogContentText>
-            {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="text"
-            fullWidth
-            variant="standard"
-          /> */}
           </DialogContent>
           <DialogActions>
             <Button onClick={deleteAllTask}>המשך !</Button>

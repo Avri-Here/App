@@ -60,13 +60,15 @@ export default function Router() {
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
     axios
-      .post("http://localhost:3001/checkAuth", {
+      .post("https://sure-cook-production.up.railway.app/checkAuth", {
         token: localStorage.getItem("token"),
       })
       .then(() => {
         if (
           window.location.href === "http://localhost:3000/Sign-In" ||
           window.location.href === "http://localhost:3000/"
+          // window.location.href === "https://papaya-praline-988d3e.netlify.app/Sign-In" ||
+          // window.location.href === "https://papaya-praline-988d3e.netlify.app"
         ) {
           dispatch({ type: "showNav", showNav: true });
           navigate("/HomePage");
@@ -102,7 +104,9 @@ export default function Router() {
         <Route path="News" element={<News />} />
         <Route
           path="Account_Settings"
-          element={<Account_Settings name={state.userName} />}
+          element={
+            <Account_Settings reducer={dispatch} name={state.userName} />
+          }
         />
         <Route path="SendMeEmail" element={<SendMeEmail />} />
         {/* <Route path="*" element={<NoPage />} /> */}

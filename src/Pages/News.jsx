@@ -17,7 +17,7 @@ export default function News() {
     }
   }
   useEffect(() => {
-    axios("http://localhost:3001/news").then((res) => {
+    axios("https://sure-cook-production.up.railway.app/news").then((res) => {
       console.log(res);
       sessionStorage.setItem("newsArr", JSON.stringify(res.data.News));
     });
@@ -34,8 +34,8 @@ export default function News() {
         {arrNews.map((item, index) => {
           return (
             <>
-              <div key={index}style={{ textAlign: "center" }}>
-                <ListItem key={index} alignItems="flex-start">
+              <div key={index} style={{ textAlign: "center" }}>
+                <ListItem alignItems="flex-start">
                   <ListItemText
                     className="txt"
                     style={{ textAlign: "center" }}

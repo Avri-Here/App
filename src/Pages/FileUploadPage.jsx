@@ -12,7 +12,7 @@ function FileUploadPage() {
   const handleSubmission = () => {
     const formData = new FormData();
     formData.append("image", selectedFile);
-    fetch("http://localhost:3001/uploads", {
+    fetch("https://sure-cook-production.up.railway.app/uploads", {
       method: "POST",
       body: formData,
     })
